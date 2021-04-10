@@ -1,0 +1,70 @@
+<Window x:Class="WpfMath.Example.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:WpfMath.Controls;assembly=WpfMath"
+        Title="MathBoard" Width="1000" Height="800"
+        Closed="Window_Closed" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="2" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid x:Name="grdSelect" Grid.Column="0" Grid.RowSpan="4" Background="Orange">
+            <Button HorizontalAlignment="Center" Margin="0,19,0,0" VerticalAlignment="Top">
+                <Button x:Name="lastic" Content="" MouseDown="imgTL_MouseDown" Click="Button_Click" Height="25" Width="25"/>
+            </Button>
+        </Grid>
+        <DockPanel Margin="10,10,10,0" Grid.Row="0" Grid.Column="1"/>
+
+        <Grid Margin="0,0,0,10" Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+        </Grid>
+
+        <ScrollViewer x:Name="sv1" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" VerticalScrollBarVisibility="Hidden">
+            <InkCanvas x:Name="ic">
+                <controls:FormulaControl Name="Formula" Formula="{Binding Text, ElementName = InputTextBox, NotifyOnValidationError=True}"
+                                         
+                                         SelectionBrush="LightBlue"
+                                         SystemTextFontName="Arial"
+                                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SnapsToDevicePixels="True" BorderThickness="5,5,5,5" >
+
+                </controls:FormulaControl>
+            </InkCanvas>
+        </ScrollViewer>
+        <Grid x:Name="grdFormula" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Height="80" Background="#FFFFDB8D" Visibility="Visible">
+            <TextBox Margin="10,10,10,50"
+                     x:Name="InputTextBox" SelectionChanged="inputTextBox_SelectionChanged" KeyDown="saveButton_Click" />
+            <Label Margin="10,35,21,10">
+                <Label.Style>
+                    <Style TargetType="{x:Type Label}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding HasError, ElementName=Formula}" Value="False">
+                                <Setter Property="Content" Value="Верная формула" />
+                                <Setter Property="Foreground" Value="Green" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding HasError, ElementName=Formula}" Value="True">
+                                <Setter Property="Content" Value="{Binding Errors[0].Message, ElementName=Formula}" />
+                                <Setter Property="Foreground" Value="Red" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+        </Grid>
+    </Grid>
+</Window>

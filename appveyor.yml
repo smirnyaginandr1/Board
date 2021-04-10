@@ -1,0 +1,10 @@
+image:
+    - Visual Studio 2019
+before_build:
+    - pwsh: ./scripts/verify-encoding.ps1
+build_script:
+    - dotnet build
+after_build:
+    - dotnet pack
+test_script:
+    - dotnet test

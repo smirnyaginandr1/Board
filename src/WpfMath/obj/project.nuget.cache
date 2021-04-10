@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "I2VNvmfc7cqUMYsQjjBajSgKJNGHrI0FlE4qHHkcMsvvrabEi01ewgWE+qQWj8lgv07A8/xkkNeTlp6wnCmvVQ==",
+  "success": true,
+  "projectFilePath": "D:\\wpf-math-master\\wpf-math-master\\src\\WpfMath\\WpfMath.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Павел\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.0.1\\microsoft.aspnetcore.app.ref.3.0.1.nupkg.sha512",
+    "C:\\Users\\Павел\\.nuget\\packages\\microsoft.netcore.app.ref\\3.0.0\\microsoft.netcore.app.ref.3.0.0.nupkg.sha512",
+    "C:\\Users\\Павел\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.0.0\\microsoft.windowsdesktop.app.ref.3.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,51 @@
+{
+  "TextStyle": null,
+  "RootAtom": {
+    "[AtomType]": "StyledAtom",
+    "RowAtom": {
+      "[AtomType]": "RowAtom",
+      "PreviousAtom": null,
+      "Elements": [
+        {
+          "[AtomType]": "CharAtom",
+          "Character": "x",
+          "TextStyle": null,
+          "IsTextSymbol": false,
+          "Type": "Ordinary",
+          "Source": {
+            "Start": 32,
+            "End": 33,
+            "Length": 1,
+            "Source": "\\colorbox [rgb] {0.5, 0.5, 0.5} x",
+            "SourceName": "User input"
+          }
+        }
+      ],
+      "Type": "Ordinary",
+      "Source": {
+        "Start": 1,
+        "End": 33,
+        "Length": 32,
+        "Source": "\\colorbox [rgb] {0.5, 0.5, 0.5} x",
+        "SourceName": "User input"
+      }
+    },
+    "Background": "#FF808080",
+    "Foreground": null,
+    "Type": "Ordinary",
+    "Source": {
+      "Start": 1,
+      "End": 33,
+      "Length": 32,
+      "Source": "\\colorbox [rgb] {0.5, 0.5, 0.5} x",
+      "SourceName": "User input"
+    }
+  },
+  "Source": {
+    "Start": 0,
+    "End": 33,
+    "Length": 33,
+    "Source": "\\colorbox [rgb] {0.5, 0.5, 0.5} x",
+    "SourceName": "User input"
+  }
+}
