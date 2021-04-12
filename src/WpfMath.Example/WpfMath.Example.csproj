@@ -16,7 +16,6 @@
       <None Remove="graph.png" />
       <None Remove="lastik02.png" />
       <None Remove="lines.png" />
-      <None Remove="pen.png" />
       <None Remove="pencil.png" />
     </ItemGroup>
     <ItemGroup>
@@ -42,9 +41,6 @@
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       </Resource>
       <Resource Include="lines.png">
-        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      </Resource>
-      <Resource Include="pen.png">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       </Resource>
       <Resource Include="pencil.png">
