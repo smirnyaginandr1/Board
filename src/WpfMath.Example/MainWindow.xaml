@@ -147,35 +147,3 @@
         </Grid>
     </Grid>
 </Window>
-
-
-
-                                         SelectionBrush="LightBlue"
-                                         SystemTextFontName="Arial"
-                                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SnapsToDevicePixels="True" BorderThickness="5,5,5,5" >
-
-                </controls:FormulaControl>
-            </InkCanvas>
-        </ScrollViewer>
-        <Grid x:Name="grdFormula" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Height="80" Background="#FFFFDB8D" Visibility="Visible">
-            <TextBox Margin="10,10,10,50"
-                     x:Name="InputTextBox" SelectionChanged="inputTextBox_SelectionChanged" KeyDown="saveButton_Click" />
-            <Label Margin="10,35,21,10">
-                <Label.Style>
-                    <Style TargetType="{x:Type Label}">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding HasError, ElementName=Formula}" Value="False">
-                                <Setter Property="Content" Value="Верная формула" />
-                                <Setter Property="Foreground" Value="Green" />
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding HasError, ElementName=Formula}" Value="True">
-                                <Setter Property="Content" Value="{Binding Errors[0].Message, ElementName=Formula}" />
-                                <Setter Property="Foreground" Value="Red" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Label.Style>
-            </Label>
-        </Grid>
-    </Grid>
-</Window>
