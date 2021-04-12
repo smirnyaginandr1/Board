@@ -44,7 +44,7 @@ namespace WpfMath.Example
         private void saveButton_Click(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
-            { 
+            {
                 // Choose file
                 SaveFileDialog saveFileDialog = new SaveFileDialog()
                 {
@@ -121,7 +121,7 @@ namespace WpfMath.Example
         {
             newFormula = new FormulaControl();
             ParseFormula(InputTextBox.Text, newFormula);
-            
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -129,6 +129,45 @@ namespace WpfMath.Example
             if (ic.EditingMode == InkCanvasEditingMode.Ink)
                 ic.EditingMode = InkCanvasEditingMode.EraseByPoint;
             else ic.EditingMode = InkCanvasEditingMode.Ink;
+        }
+
+        private void pen_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Color_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void del_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void ContexMenuFile_Click(object sender, RoutedEventArgs e)
+        {
+            var addButton = sender as FrameworkElement;
+            if (addButton != null)
+            {
+                addButton.ContextMenu.IsOpen = true;
+            }
+        }
+        private void ContexMenuInfo_Click(object sender, RoutedEventArgs e)
+        {
+            var addButton = sender as FrameworkElement;
+            if (addButton != null)
+            {
+                addButton.ContextMenu.IsOpen = true;
+            }
+        }
+        private void ContexMenuHelp_Click(object sender, RoutedEventArgs e)
+        {
+            var addButton = sender as FrameworkElement;
+            if (addButton != null)
+            {
+                addButton.ContextMenu.IsOpen = true;
+            }
         }
     }
 }

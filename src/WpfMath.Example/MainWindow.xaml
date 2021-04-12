@@ -5,40 +5,151 @@
         Title="MathBoard" Width="1000" Height="800"
         Closed="Window_Closed" WindowStartupLocation="CenterScreen">
     <Window.Resources>
+        <Style x:Key="Round">
 
-        <Style TargetType="Button">
-            <Setter Property="Padding" Value="2" />
         </Style>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
+            <RowDefinition Height="25*"></RowDefinition>
+            <RowDefinition Height="580*" />
+            <RowDefinition Height="90*" />
+            <RowDefinition Height="80*"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="grdSelect" Grid.Column="0" Grid.RowSpan="4" Background="Orange">
-            <Button HorizontalAlignment="Center" Margin="0,19,0,0" VerticalAlignment="Top">
-                <Button x:Name="lastic" Content="" MouseDown="imgTL_MouseDown" Click="Button_Click" Height="25" Width="25"/>
+        <Grid x:Name="grdSelect" Grid.Column="0" Grid.Row="3" Background="#FFD9AC5B">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="lastic" MouseDown="imgTL_MouseDown" Background="{x:Null}" Click="Button_Click" Height="45" Width="45" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Visible" Grid.Column="0">
+                    <Image Source="lastik02.png" Visibility="Visible" Width="auto" Height="auto" HorizontalAlignment="Left" VerticalAlignment="Center"></Image>
+                </Button>
+
+                <Button x:Name="pen" Click="pen_Click" Height="45" Width="45" Background="{x:Null}"  HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Visible" Grid.Column="1">
+                    <Image Source="pencil.png"></Image>
+                </Button>
+
+                <Button x:Name="graph" Click="pen_Click" Height="45" Width="45" Background="{x:Null}"  HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Visible" Grid.Column="2">
+                    <Image Source="graph.png"></Image>
+                </Button>
+
+                <Button x:Name="formula" Click="pen_Click" Height="45" Width="45" Background="{x:Null}"  HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Visible" Grid.Column="3" >
+                    <Image Source="formula.png"></Image>
+                </Button>
+
+                <Button x:Name="lines" Click="pen_Click" Height="45" Width="45" Background="{x:Null}"  HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Visible" Grid.Column="4" >
+                    <Image Source="lines.png"></Image>
+                </Button>
+            </Grid>
+            <Button x:Name="del" Click="del_Click" Height="45" Width="90" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="1" >
+                Очистить лист
+            </Button>
+            <Button x:Name="color" Click="Color_Click" Height="90" Width="90" Background="{x:Null}" BorderBrush="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="2" >
+                <Image Source="gradient.png" Height="62" Width="70"></Image>
             </Button>
         </Grid>
-        <DockPanel Margin="10,10,10,0" Grid.Row="0" Grid.Column="1"/>
-
-        <Grid Margin="0,0,0,10" Grid.Row="2" Grid.Column="1">
+        <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition />
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            <DockPanel Margin="0,0,0,0" Grid.Row="0" Grid.ColumnSpan="4" Background="Gray">
+            </DockPanel>
+            <MenuItem Click="ContexMenuFile_Click" x:Name="ContexMenuFile" Grid.Column="0" Header="Файл">
+                <MenuItem.Icon>
+                    <Label Margin="-3,-4,-21,-4">Файл</Label>
+                </MenuItem.Icon>
+                <MenuItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Element 1"/>
+                        <MenuItem Header="Element 2"/>
+                        <MenuItem Header="Element 3"/>
+                    </ContextMenu>
+                </MenuItem.ContextMenu>
+            </MenuItem>
+            <MenuItem Click="ContexMenuInfo_Click" x:Name="ContexMenuInfo" Grid.Column="1" Header="Файл">
+                <MenuItem.Icon>
+                    <Label Margin="-3,-4,-41,-7">Справка</Label>
+                </MenuItem.Icon>
+                <MenuItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Element 4"/>
+                        <MenuItem Header="Element 5"/>
+                        <MenuItem Header="Element 6"/>
+                    </ContextMenu>
+                </MenuItem.ContextMenu>
+            </MenuItem>
+            <MenuItem Click="ContexMenuHelp_Click" x:Name="ContexMenuHelp" Grid.Column="2" Header="Файл" Margin="0,0,5,0">
+                <MenuItem.Icon>
+                    <Label Margin="-3,-4,-71,-7">О программе</Label>
+                </MenuItem.Icon>
+                <MenuItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Element 7"/>
+                        <MenuItem Header="Element 8"/>
+                        <MenuItem Header="Element 9"/>
+                    </ContextMenu>
+                </MenuItem.ContextMenu>
+            </MenuItem>
         </Grid>
 
-        <ScrollViewer x:Name="sv1" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" VerticalScrollBarVisibility="Hidden">
-            <InkCanvas x:Name="ic">
+
+
+        <ScrollViewer x:Name="sv1" Grid.Column="0" Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+            <InkCanvas x:Name="ic" Height="auto">
                 <controls:FormulaControl Name="Formula" Formula="{Binding Text, ElementName = InputTextBox, NotifyOnValidationError=True}"
-                                         
+
+                                         SelectionBrush="LightBlue"
+                                         SystemTextFontName="Arial"
+                                         HorizontalAlignment="Center" VerticalAlignment="Center" SnapsToDevicePixels="True" BorderThickness="5,5,5,5" >
+
+                </controls:FormulaControl>
+            </InkCanvas>
+        </ScrollViewer>
+        <Grid x:Name="grdFormula" Grid.Column="0" Grid.Row="2" Width="670" Background="#FFFFDB8D" Visibility="Visible" Margin="0,0,0,0" >
+            <TextBox Margin="10,10,10,50"
+                     x:Name="InputTextBox" SelectionChanged="inputTextBox_SelectionChanged" KeyDown="saveButton_Click" />
+            <Label Margin="10,42.9,21,10">
+                <Label.Style>
+                    <Style TargetType="{x:Type Label}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding HasError, ElementName=Formula}" Value="False">
+                                <Setter Property="Content" Value="Верная формула" />
+                                <Setter Property="Foreground" Value="Green" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding HasError, ElementName=Formula}" Value="True">
+                                <Setter Property="Content" Value="{Binding Errors[0].Message, ElementName=Formula}" />
+                                <Setter Property="Foreground" Value="Red" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+        </Grid>
+    </Grid>
+</Window>
+
+
+
                                          SelectionBrush="LightBlue"
                                          SystemTextFontName="Arial"
                                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SnapsToDevicePixels="True" BorderThickness="5,5,5,5" >
