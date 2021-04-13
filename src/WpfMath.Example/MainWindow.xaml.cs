@@ -113,7 +113,7 @@ namespace WpfMath.Example
 
         private void FormulaTextBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var item = (ComboBoxItem) ((ComboBox) sender).SelectedItem;
+            var item = (ComboBoxItem)((ComboBox)sender).SelectedItem;
             InputTextBox.Text = (string)item.DataContext;
         }
 
@@ -126,24 +126,22 @@ namespace WpfMath.Example
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (ic.EditingMode == InkCanvasEditingMode.Ink)
-                ic.EditingMode = InkCanvasEditingMode.EraseByPoint;
-            else ic.EditingMode = InkCanvasEditingMode.Ink;
+            ic.EditingMode = InkCanvasEditingMode.EraseByPoint;
         }
 
         private void pen_Click(object sender, RoutedEventArgs e)
         {
-
+            ic.EditingMode = InkCanvasEditingMode.Ink;
         }
 
         private void Color_Click(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void del_Click(object sender, RoutedEventArgs e)
         {
-
+            this.ic.Strokes.Clear();
+            InputTextBox.Clear();
         }
         private void ContexMenuFile_Click(object sender, RoutedEventArgs e)
         {
@@ -168,6 +166,21 @@ namespace WpfMath.Example
             {
                 addButton.ContextMenu.IsOpen = true;
             }
+        }
+
+        private void formula_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void graph_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void lines_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

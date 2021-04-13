@@ -5,9 +5,6 @@
         Title="MathBoard" Width="1000" Height="800"
         Closed="Window_Closed" WindowStartupLocation="CenterScreen">
     <Window.Resources>
-        <Style x:Key="Round">
-
-        </Style>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -19,7 +16,7 @@
             <RowDefinition Height="90*" />
             <RowDefinition Height="80*"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="grdSelect" Grid.Column="0" Grid.Row="3" Background="#FFD9AC5B">
+        <Grid x:Name="grdSelect" Grid.Column="0" Grid.Row="3" Background="LightYellow">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="*"/>
@@ -46,15 +43,15 @@
                     <Image Source="pencil.png"></Image>
                 </Button>
 
-                <Button x:Name="graph" Click="pen_Click" Height="45" Width="45" Background="{x:Null}"  HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Visible" Grid.Column="2">
+                <Button x:Name="graph" Click="graph_Click" Height="45" Width="45" Background="{x:Null}"  HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Visible" Grid.Column="2">
                     <Image Source="graph.png"></Image>
                 </Button>
 
-                <Button x:Name="formula" Click="pen_Click" Height="45" Width="45" Background="{x:Null}"  HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Visible" Grid.Column="3" >
+                <Button x:Name="formula" Click="formula_Click" Height="45" Width="45" Background="{x:Null}"  HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Visible" Grid.Column="3" >
                     <Image Source="formula.png"></Image>
                 </Button>
 
-                <Button x:Name="lines" Click="pen_Click" Height="45" Width="45" Background="{x:Null}"  HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Visible" Grid.Column="4" >
+                <Button x:Name="lines" Click="lines_Click" Height="45" Width="45" Background="{x:Null}"  HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Visible" Grid.Column="4" >
                     <Image Source="lines.png"></Image>
                 </Button>
             </Grid>
@@ -80,9 +77,9 @@
                 </MenuItem.Icon>
                 <MenuItem.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Element 1"/>
-                        <MenuItem Header="Element 2"/>
-                        <MenuItem Header="Element 3"/>
+                        <MenuItem Header="Сохранить файл"/>
+                        <MenuItem Header="Загрузить файл"/>
+                        <MenuItem Header="Настройки"/>
                     </ContextMenu>
                 </MenuItem.ContextMenu>
             </MenuItem>
@@ -115,7 +112,7 @@
 
 
         <ScrollViewer x:Name="sv1" Grid.Column="0" Grid.Row="1" VerticalScrollBarVisibility="Hidden">
-            <InkCanvas x:Name="ic" Height="auto">
+            <InkCanvas x:Name="ic" Height="auto" Cursor="Pen">
                 <controls:FormulaControl Name="Formula" Formula="{Binding Text, ElementName = InputTextBox, NotifyOnValidationError=True}"
 
                                          SelectionBrush="LightBlue"
@@ -125,7 +122,7 @@
                 </controls:FormulaControl>
             </InkCanvas>
         </ScrollViewer>
-        <Grid x:Name="grdFormula" Grid.Column="0" Grid.Row="2" Width="670" Background="#FFFFDB8D" Visibility="Visible" Margin="0,0,0,0" >
+        <Grid x:Name="grdFormula" Grid.Column="0" Grid.Row="2" Width="670" Background="Cornsilk" Visibility="Visible" Margin="0,0,0,0" >
             <TextBox Margin="10,10,10,50"
                      x:Name="InputTextBox" SelectionChanged="inputTextBox_SelectionChanged" KeyDown="saveButton_Click" />
             <Label Margin="10,42.9,21,10">

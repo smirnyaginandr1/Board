@@ -26,3 +26,17 @@ D:\wpf-math-master\wpf-math-master\src\WpfMath\obj\Debug\net452\WpfMath.Assembly
 D:\wpf-math-master\wpf-math-master\src\WpfMath\obj\Debug\net452\WpfMath.csproj.CoreCompileInputs.cache
 D:\wpf-math-master\wpf-math-master\src\WpfMath\obj\Debug\net452\WpfMath.dll
 D:\wpf-math-master\wpf-math-master\src\WpfMath\obj\Debug\net452\WpfMath.pdb
+C:\Users\olezh\Source\Repos\Board1\src\WpfMath\bin\Debug\net452\WpfMath.dll
+C:\Users\olezh\Source\Repos\Board1\src\WpfMath\bin\Debug\net452\WpfMath.pdb
+C:\Users\olezh\Source\Repos\Board1\src\WpfMath\obj\Debug\net452\WpfMath.csprojAssemblyReference.cache
+C:\Users\olezh\Source\Repos\Board1\src\WpfMath\obj\Debug\net452\Controls\FormulaControl.g.cs
+C:\Users\olezh\Source\Repos\Board1\src\WpfMath\obj\Debug\net452\GeneratedInternalTypeHelper.g.cs
+C:\Users\olezh\Source\Repos\Board1\src\WpfMath\obj\Debug\net452\WpfMath_MarkupCompile.cache
+C:\Users\olezh\Source\Repos\Board1\src\WpfMath\obj\Debug\net452\WpfMath_MarkupCompile.lref
+C:\Users\olezh\Source\Repos\Board1\src\WpfMath\obj\Debug\net452\Controls\FormulaControl.baml
+C:\Users\olezh\Source\Repos\Board1\src\WpfMath\obj\Debug\net452\WpfMath.g.resources
+C:\Users\olezh\Source\Repos\Board1\src\WpfMath\obj\Debug\net452\WpfMath.AssemblyInfoInputs.cache
+C:\Users\olezh\Source\Repos\Board1\src\WpfMath\obj\Debug\net452\WpfMath.AssemblyInfo.cs
+C:\Users\olezh\Source\Repos\Board1\src\WpfMath\obj\Debug\net452\WpfMath.csproj.CoreCompileInputs.cache
+C:\Users\olezh\Source\Repos\Board1\src\WpfMath\obj\Debug\net452\WpfMath.dll
+C:\Users\olezh\Source\Repos\Board1\src\WpfMath\obj\Debug\net452\WpfMath.pdb

@@ -5,12 +5,12 @@
     <RestoreTool Condition=" '$(RestoreTool)' == '' ">NuGet</RestoreTool>
     <ProjectAssetsFile Condition=" '$(ProjectAssetsFile)' == '' ">$(MSBuildThisFileDirectory)project.assets.json</ProjectAssetsFile>
     <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
-    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\Павел\.nuget\packages\;C:\Microsoft\Xamarin\NuGet\</NuGetPackageFolders>
+    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\olezh\.nuget\packages\</NuGetPackageFolders>
     <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
-    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">5.8.0</NuGetToolVersion>
+    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">5.9.1</NuGetToolVersion>
   </PropertyGroup>
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <SourceRoot Include="$([MSBuild]::EnsureTrailingSlash($(NuGetPackageFolders)))" />
+    <SourceRoot Include="C:\Users\olezh\.nuget\packages\" />
   </ItemGroup>
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
@@ -35,36 +35,36 @@
     <Import Project="$(NuGetPackageRoot)approvaltests\4.2.2\build\ApprovalTests.props" Condition="Exists('$(NuGetPackageRoot)approvaltests\4.2.2\build\ApprovalTests.props')" />
   </ImportGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net461' AND '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Pkgxunit_runner_visualstudio Condition=" '$(Pkgxunit_runner_visualstudio)' == '' ">C:\Users\Павел\.nuget\packages\xunit.runner.visualstudio\2.4.1</Pkgxunit_runner_visualstudio>
-    <Pkgxunit_abstractions Condition=" '$(Pkgxunit_abstractions)' == '' ">C:\Users\Павел\.nuget\packages\xunit.abstractions\2.0.3</Pkgxunit_abstractions>
-    <Pkgxunit_extensibility_core Condition=" '$(Pkgxunit_extensibility_core)' == '' ">C:\Users\Павел\.nuget\packages\xunit.extensibility.core\2.4.1</Pkgxunit_extensibility_core>
-    <Pkgxunit_extensibility_execution Condition=" '$(Pkgxunit_extensibility_execution)' == '' ">C:\Users\Павел\.nuget\packages\xunit.extensibility.execution\2.4.1</Pkgxunit_extensibility_execution>
-    <Pkgxunit_core Condition=" '$(Pkgxunit_core)' == '' ">C:\Users\Павел\.nuget\packages\xunit.core\2.4.1</Pkgxunit_core>
-    <Pkgxunit_assert Condition=" '$(Pkgxunit_assert)' == '' ">C:\Users\Павел\.nuget\packages\xunit.assert\2.4.1</Pkgxunit_assert>
-    <Pkgxunit_analyzers Condition=" '$(Pkgxunit_analyzers)' == '' ">C:\Users\Павел\.nuget\packages\xunit.analyzers\0.10.0</Pkgxunit_analyzers>
-    <Pkgxunit Condition=" '$(Pkgxunit)' == '' ">C:\Users\Павел\.nuget\packages\xunit\2.4.1</Pkgxunit>
-    <PkgSystem_ValueTuple Condition=" '$(PkgSystem_ValueTuple)' == '' ">C:\Users\Павел\.nuget\packages\system.valuetuple\4.4.0</PkgSystem_ValueTuple>
-    <PkgNewtonsoft_Json Condition=" '$(PkgNewtonsoft_Json)' == '' ">C:\Users\Павел\.nuget\packages\newtonsoft.json\12.0.2</PkgNewtonsoft_Json>
-    <PkgMicrosoft_NET_Test_Sdk Condition=" '$(PkgMicrosoft_NET_Test_Sdk)' == '' ">C:\Users\Павел\.nuget\packages\microsoft.net.test.sdk\16.3.0</PkgMicrosoft_NET_Test_Sdk>
-    <PkgFSharp_Core Condition=" '$(PkgFSharp_Core)' == '' ">C:\Users\Павел\.nuget\packages\fsharp.core\5.0.0</PkgFSharp_Core>
-    <PkgFSharp_Core_Fluent-4_0 Condition=" '$(PkgFSharp_Core_Fluent-4_0)' == '' ">C:\Users\Павел\.nuget\packages\fsharp.core.fluent-4.0\1.0.0.6</PkgFSharp_Core_Fluent-4_0>
-    <PkgFoq Condition=" '$(PkgFoq)' == '' ">C:\Users\Павел\.nuget\packages\foq\1.8.0</PkgFoq>
-    <PkgApprovalTests Condition=" '$(PkgApprovalTests)' == '' ">C:\Users\Павел\.nuget\packages\approvaltests\4.2.2</PkgApprovalTests>
+    <Pkgxunit_runner_visualstudio Condition=" '$(Pkgxunit_runner_visualstudio)' == '' ">C:\Users\olezh\.nuget\packages\xunit.runner.visualstudio\2.4.1</Pkgxunit_runner_visualstudio>
+    <Pkgxunit_abstractions Condition=" '$(Pkgxunit_abstractions)' == '' ">C:\Users\olezh\.nuget\packages\xunit.abstractions\2.0.3</Pkgxunit_abstractions>
+    <Pkgxunit_extensibility_core Condition=" '$(Pkgxunit_extensibility_core)' == '' ">C:\Users\olezh\.nuget\packages\xunit.extensibility.core\2.4.1</Pkgxunit_extensibility_core>
+    <Pkgxunit_extensibility_execution Condition=" '$(Pkgxunit_extensibility_execution)' == '' ">C:\Users\olezh\.nuget\packages\xunit.extensibility.execution\2.4.1</Pkgxunit_extensibility_execution>
+    <Pkgxunit_core Condition=" '$(Pkgxunit_core)' == '' ">C:\Users\olezh\.nuget\packages\xunit.core\2.4.1</Pkgxunit_core>
+    <Pkgxunit_assert Condition=" '$(Pkgxunit_assert)' == '' ">C:\Users\olezh\.nuget\packages\xunit.assert\2.4.1</Pkgxunit_assert>
+    <Pkgxunit_analyzers Condition=" '$(Pkgxunit_analyzers)' == '' ">C:\Users\olezh\.nuget\packages\xunit.analyzers\0.10.0</Pkgxunit_analyzers>
+    <Pkgxunit Condition=" '$(Pkgxunit)' == '' ">C:\Users\olezh\.nuget\packages\xunit\2.4.1</Pkgxunit>
+    <PkgSystem_ValueTuple Condition=" '$(PkgSystem_ValueTuple)' == '' ">C:\Users\olezh\.nuget\packages\system.valuetuple\4.4.0</PkgSystem_ValueTuple>
+    <PkgNewtonsoft_Json Condition=" '$(PkgNewtonsoft_Json)' == '' ">C:\Users\olezh\.nuget\packages\newtonsoft.json\12.0.2</PkgNewtonsoft_Json>
+    <PkgMicrosoft_NET_Test_Sdk Condition=" '$(PkgMicrosoft_NET_Test_Sdk)' == '' ">C:\Users\olezh\.nuget\packages\microsoft.net.test.sdk\16.3.0</PkgMicrosoft_NET_Test_Sdk>
+    <PkgFSharp_Core Condition=" '$(PkgFSharp_Core)' == '' ">C:\Users\olezh\.nuget\packages\fsharp.core\5.0.0</PkgFSharp_Core>
+    <PkgFSharp_Core_Fluent-4_0 Condition=" '$(PkgFSharp_Core_Fluent-4_0)' == '' ">C:\Users\olezh\.nuget\packages\fsharp.core.fluent-4.0\1.0.0.6</PkgFSharp_Core_Fluent-4_0>
+    <PkgFoq Condition=" '$(PkgFoq)' == '' ">C:\Users\olezh\.nuget\packages\foq\1.8.0</PkgFoq>
+    <PkgApprovalTests Condition=" '$(PkgApprovalTests)' == '' ">C:\Users\olezh\.nuget\packages\approvaltests\4.2.2</PkgApprovalTests>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0' AND '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgNewtonsoft_Json Condition=" '$(PkgNewtonsoft_Json)' == '' ">C:\Users\Павел\.nuget\packages\newtonsoft.json\12.0.2</PkgNewtonsoft_Json>
-    <PkgMicrosoft_NET_Test_Sdk Condition=" '$(PkgMicrosoft_NET_Test_Sdk)' == '' ">C:\Users\Павел\.nuget\packages\microsoft.net.test.sdk\16.3.0</PkgMicrosoft_NET_Test_Sdk>
-    <Pkgxunit_runner_visualstudio Condition=" '$(Pkgxunit_runner_visualstudio)' == '' ">C:\Users\Павел\.nuget\packages\xunit.runner.visualstudio\2.4.1</Pkgxunit_runner_visualstudio>
-    <Pkgxunit_abstractions Condition=" '$(Pkgxunit_abstractions)' == '' ">C:\Users\Павел\.nuget\packages\xunit.abstractions\2.0.3</Pkgxunit_abstractions>
-    <Pkgxunit_extensibility_core Condition=" '$(Pkgxunit_extensibility_core)' == '' ">C:\Users\Павел\.nuget\packages\xunit.extensibility.core\2.4.1</Pkgxunit_extensibility_core>
-    <Pkgxunit_extensibility_execution Condition=" '$(Pkgxunit_extensibility_execution)' == '' ">C:\Users\Павел\.nuget\packages\xunit.extensibility.execution\2.4.1</Pkgxunit_extensibility_execution>
-    <Pkgxunit_core Condition=" '$(Pkgxunit_core)' == '' ">C:\Users\Павел\.nuget\packages\xunit.core\2.4.1</Pkgxunit_core>
-    <Pkgxunit_assert Condition=" '$(Pkgxunit_assert)' == '' ">C:\Users\Павел\.nuget\packages\xunit.assert\2.4.1</Pkgxunit_assert>
-    <Pkgxunit_analyzers Condition=" '$(Pkgxunit_analyzers)' == '' ">C:\Users\Павел\.nuget\packages\xunit.analyzers\0.10.0</Pkgxunit_analyzers>
-    <Pkgxunit Condition=" '$(Pkgxunit)' == '' ">C:\Users\Павел\.nuget\packages\xunit\2.4.1</Pkgxunit>
-    <PkgFSharp_Core Condition=" '$(PkgFSharp_Core)' == '' ">C:\Users\Павел\.nuget\packages\fsharp.core\5.0.0</PkgFSharp_Core>
-    <PkgFSharp_Core_Fluent-4_0 Condition=" '$(PkgFSharp_Core_Fluent-4_0)' == '' ">C:\Users\Павел\.nuget\packages\fsharp.core.fluent-4.0\1.0.0.6</PkgFSharp_Core_Fluent-4_0>
-    <PkgFoq Condition=" '$(PkgFoq)' == '' ">C:\Users\Павел\.nuget\packages\foq\1.8.0</PkgFoq>
-    <PkgApprovalTests Condition=" '$(PkgApprovalTests)' == '' ">C:\Users\Павел\.nuget\packages\approvaltests\4.2.2</PkgApprovalTests>
+    <PkgNewtonsoft_Json Condition=" '$(PkgNewtonsoft_Json)' == '' ">C:\Users\olezh\.nuget\packages\newtonsoft.json\12.0.2</PkgNewtonsoft_Json>
+    <PkgMicrosoft_NET_Test_Sdk Condition=" '$(PkgMicrosoft_NET_Test_Sdk)' == '' ">C:\Users\olezh\.nuget\packages\microsoft.net.test.sdk\16.3.0</PkgMicrosoft_NET_Test_Sdk>
+    <Pkgxunit_runner_visualstudio Condition=" '$(Pkgxunit_runner_visualstudio)' == '' ">C:\Users\olezh\.nuget\packages\xunit.runner.visualstudio\2.4.1</Pkgxunit_runner_visualstudio>
+    <Pkgxunit_abstractions Condition=" '$(Pkgxunit_abstractions)' == '' ">C:\Users\olezh\.nuget\packages\xunit.abstractions\2.0.3</Pkgxunit_abstractions>
+    <Pkgxunit_extensibility_core Condition=" '$(Pkgxunit_extensibility_core)' == '' ">C:\Users\olezh\.nuget\packages\xunit.extensibility.core\2.4.1</Pkgxunit_extensibility_core>
+    <Pkgxunit_extensibility_execution Condition=" '$(Pkgxunit_extensibility_execution)' == '' ">C:\Users\olezh\.nuget\packages\xunit.extensibility.execution\2.4.1</Pkgxunit_extensibility_execution>
+    <Pkgxunit_core Condition=" '$(Pkgxunit_core)' == '' ">C:\Users\olezh\.nuget\packages\xunit.core\2.4.1</Pkgxunit_core>
+    <Pkgxunit_assert Condition=" '$(Pkgxunit_assert)' == '' ">C:\Users\olezh\.nuget\packages\xunit.assert\2.4.1</Pkgxunit_assert>
+    <Pkgxunit_analyzers Condition=" '$(Pkgxunit_analyzers)' == '' ">C:\Users\olezh\.nuget\packages\xunit.analyzers\0.10.0</Pkgxunit_analyzers>
+    <Pkgxunit Condition=" '$(Pkgxunit)' == '' ">C:\Users\olezh\.nuget\packages\xunit\2.4.1</Pkgxunit>
+    <PkgFSharp_Core Condition=" '$(PkgFSharp_Core)' == '' ">C:\Users\olezh\.nuget\packages\fsharp.core\5.0.0</PkgFSharp_Core>
+    <PkgFSharp_Core_Fluent-4_0 Condition=" '$(PkgFSharp_Core_Fluent-4_0)' == '' ">C:\Users\olezh\.nuget\packages\fsharp.core.fluent-4.0\1.0.0.6</PkgFSharp_Core_Fluent-4_0>
+    <PkgFoq Condition=" '$(PkgFoq)' == '' ">C:\Users\olezh\.nuget\packages\foq\1.8.0</PkgFoq>
+    <PkgApprovalTests Condition=" '$(PkgApprovalTests)' == '' ">C:\Users\olezh\.nuget\packages\approvaltests\4.2.2</PkgApprovalTests>
   </PropertyGroup>
 </Project>

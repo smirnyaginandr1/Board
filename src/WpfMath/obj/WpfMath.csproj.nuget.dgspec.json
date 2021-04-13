@@ -1,26 +1,22 @@
 {
   "format": 1,
   "restore": {
-    "D:\\wpf-math-master\\wpf-math-master\\src\\WpfMath\\WpfMath.csproj": {}
+    "C:\\Users\\olezh\\Source\\Repos\\Board1\\src\\WpfMath\\WpfMath.csproj": {}
   },
   "projects": {
-    "D:\\wpf-math-master\\wpf-math-master\\src\\WpfMath\\WpfMath.csproj": {
+    "C:\\Users\\olezh\\Source\\Repos\\Board1\\src\\WpfMath\\WpfMath.csproj": {
       "version": "0.9.0",
       "restore": {
-        "projectUniqueName": "D:\\wpf-math-master\\wpf-math-master\\src\\WpfMath\\WpfMath.csproj",
+        "projectUniqueName": "C:\\Users\\olezh\\Source\\Repos\\Board1\\src\\WpfMath\\WpfMath.csproj",
         "projectName": "WpfMath",
-        "projectPath": "D:\\wpf-math-master\\wpf-math-master\\src\\WpfMath\\WpfMath.csproj",
-        "packagesPath": "C:\\Users\\Павел\\.nuget\\packages\\",
-        "outputPath": "D:\\wpf-math-master\\wpf-math-master\\src\\WpfMath\\obj\\",
+        "projectPath": "C:\\Users\\olezh\\Source\\Repos\\Board1\\src\\WpfMath\\WpfMath.csproj",
+        "packagesPath": "C:\\Users\\olezh\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\olezh\\Source\\Repos\\Board1\\src\\WpfMath\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Павел\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\olezh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net452",
@@ -76,11 +72,11 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         },
         "net452": {
           "targetAlias": "net452",
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

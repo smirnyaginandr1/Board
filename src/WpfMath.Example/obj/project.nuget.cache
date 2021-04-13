@@ -1,14 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "+FplyCUFVDPXSc3dEfmfoDuTl54x02Z46Eb8XiNIuDN/QXgcLpzbEe+qRS+T7FseMZRcAWsvUw++ij1WeejJoQ==",
+  "dgSpecHash": "BEJiq07yhhjsGxlT95TW4p9yKoBhm8wzzkJmwF72/1hQ0Vu16L5rn8/ydB2JUEyNAsKYbv5jMZd3yIXXMH74Bg==",
   "success": true,
-  "projectFilePath": "D:\\wpf-math-master\\wpf-math-master\\src\\WpfMath.Example\\WpfMath.Example.csproj",
+  "projectFilePath": "C:\\Users\\olezh\\Source\\Repos\\Board1\\src\\WpfMath.Example\\WpfMath.Example.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Павел\\.nuget\\packages\\nullable\\1.2.1\\nullable.1.2.1.nupkg.sha512",
-    "C:\\Users\\Павел\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.0.1\\microsoft.aspnetcore.app.ref.3.0.1.nupkg.sha512",
-    "C:\\Users\\Павел\\.nuget\\packages\\microsoft.netcore.app.ref\\3.0.0\\microsoft.netcore.app.ref.3.0.0.nupkg.sha512",
-    "C:\\Users\\Павел\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.0.3\\microsoft.netcore.app.host.win-x64.3.0.3.nupkg.sha512",
-    "C:\\Users\\Павел\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.0.0\\microsoft.windowsdesktop.app.ref.3.0.0.nupkg.sha512"
+    "C:\\Users\\olezh\\.nuget\\packages\\nullable\\1.2.1\\nullable.1.2.1.nupkg.sha512",
+    "C:\\Users\\olezh\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.0.3\\microsoft.netcore.app.host.win-x64.3.0.3.nupkg.sha512",
+    "C:\\Users\\olezh\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.0.1\\microsoft.aspnetcore.app.ref.3.0.1.nupkg.sha512",
+    "C:\\Users\\olezh\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.0.0\\microsoft.windowsdesktop.app.ref.3.0.0.nupkg.sha512",
+    "C:\\Users\\olezh\\.nuget\\packages\\microsoft.netcore.app.ref\\3.0.0\\microsoft.netcore.app.ref.3.0.0.nupkg.sha512"
   ],
   "logs": []
 }
