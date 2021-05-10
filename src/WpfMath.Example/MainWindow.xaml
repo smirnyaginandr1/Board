@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:WpfMath.Controls;assembly=WpfMath"
         Title="MathBoard" Width="1000" Height="800"
-        Closed="Window_Closed" WindowStartupLocation="CenterScreen">
+        Closed="Window_Closed" WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded" >
     <Window.Resources>
     </Window.Resources>
     <Grid>
@@ -35,6 +36,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
+                
                 <Button x:Name="lastic" MouseDown="imgTL_MouseDown" Background="{x:Null}" Click="Button_Click" Height="45" Width="45" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Visible" Grid.Column="0">
                     <Image Source="lastik02.png" Visibility="Visible" Width="auto" Height="auto" HorizontalAlignment="Left" VerticalAlignment="Center"></Image>
                 </Button>
@@ -69,7 +71,7 @@
                 <ColumnDefinition Width="90"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <DockPanel Margin="0,0,0,0" Grid.Row="0" Grid.ColumnSpan="4" Background="Gray">
+            <DockPanel Margin="600,200,0,0" Grid.Row="0" Grid.ColumnSpan="4" Background="Azure">
             </DockPanel>
             <MenuItem Click="ContexMenuFile_Click" x:Name="ContexMenuFile" Grid.Column="0" Header="Файл">
                 <MenuItem.Icon>
@@ -109,8 +111,6 @@
             </MenuItem>
         </Grid>
 
-
-
         <ScrollViewer x:Name="sv1" Grid.Column="0" Grid.Row="1" VerticalScrollBarVisibility="Hidden">
             <InkCanvas x:Name="ic" Height="auto" Cursor="Pen">
                 <controls:FormulaControl Name="Formula" Formula="{Binding Text, ElementName = InputTextBox, NotifyOnValidationError=True}"
@@ -120,7 +120,9 @@
                                          HorizontalAlignment="Center" VerticalAlignment="Center" SnapsToDevicePixels="True" BorderThickness="5,5,5,5" >
 
                 </controls:FormulaControl>
+                
             </InkCanvas>
+            
         </ScrollViewer>
         <Grid x:Name="grdFormula" Grid.Column="0" Grid.Row="2" Width="670" Background="Cornsilk" Visibility="Visible" Margin="0,0,0,0" >
             <TextBox Margin="10,10,10,50"
@@ -142,5 +144,7 @@
                 </Label.Style>
             </Label>
         </Grid>
+        
     </Grid>
+    
 </Window>

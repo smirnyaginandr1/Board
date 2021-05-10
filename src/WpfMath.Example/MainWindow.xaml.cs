@@ -4,11 +4,14 @@ using System.IO;
 using System.Text;
 using System.Windows.Input;
 using System.Windows;
+using System.Windows.Ink;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using WpfMath.Converters;
 using WpfMath.Controls;
+using System.Windows.Media;
+using System.Windows.Forms;
 
 namespace WpfMath.Example
 {
@@ -16,12 +19,10 @@ namespace WpfMath.Example
     {
         private readonly TexFormulaParser _formulaParser = new TexFormulaParser();
         public FormulaControl newFormula = new FormulaControl();
-
         public MainWindow()
         {
             InitializeComponent();
             newFormula.Height = 100;
-
         }
 
         private TexFormula? ParseFormula(string input, FormulaControl fc)
@@ -34,19 +35,19 @@ namespace WpfMath.Example
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error occurred while parsing the given input:" + Environment.NewLine +
+                System.Windows.MessageBox.Show("An error occurred while parsing the given input:" + Environment.NewLine +
                     Environment.NewLine + ex.Message, "WPF-Math Example", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             return formula;
         }
 
-        private void saveButton_Click(object sender, KeyEventArgs e)
+        private void saveButton_Click(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
                 // Choose file
-                SaveFileDialog saveFileDialog = new SaveFileDialog()
+                Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog()
                 {
                     Filter = "SVG Files (*.svg)|*.svg|PNG Files (*.png)|*.png"
                 };
@@ -100,9 +101,22 @@ namespace WpfMath.Example
             return builder.ToString();
         }
 
+        //TODO: add save box
+        
         private void Window_Closed(object sender, EventArgs e)
         {
-            //
+            /*  «акрытие и открытие листа на одном месте
+            Properties.Settings ps = Properties.Settings.Default;
+            ps.Top = this.Top;
+            ps.Left = this.Left;
+            ps.Save();*/
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            /*Properties.Settings ps = Properties.Settings.Default;
+            this.Top = ps.Top;
+            this.Left = ps.Left;*/
         }
 
         private void inputTextBox_SelectionChanged(object sender, RoutedEventArgs e)
@@ -113,7 +127,7 @@ namespace WpfMath.Example
 
         private void FormulaTextBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var item = (ComboBoxItem)((ComboBox)sender).SelectedItem;
+            var item = (ComboBoxItem)((System.Windows.Controls.ComboBox)sender).SelectedItem;
             InputTextBox.Text = (string)item.DataContext;
         }
 
@@ -134,8 +148,14 @@ namespace WpfMath.Example
             ic.EditingMode = InkCanvasEditingMode.Ink;
         }
 
+        //TODO: Add color menu
         private void Color_Click(object sender, RoutedEventArgs e)
         {
+            ColorDialog dlg = new ColorDialog();
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                ic.DefaultDrawingAttributes.Color = Color.FromArgb(dlg.Color.A, dlg.Color.R, dlg.Color.G, dlg.Color.B);
+            }
         }
 
         private void del_Click(object sender, RoutedEventArgs e)
