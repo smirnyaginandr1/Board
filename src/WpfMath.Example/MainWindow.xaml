@@ -36,7 +36,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                
+
                 <Button x:Name="lastic" MouseDown="imgTL_MouseDown" Background="{x:Null}" Click="Button_Click" Height="45" Width="45" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Visible" Grid.Column="0">
                     <Image Source="lastik02.png" Visibility="Visible" Width="auto" Height="auto" HorizontalAlignment="Left" VerticalAlignment="Center"></Image>
                 </Button>
@@ -56,6 +56,7 @@
                 <Button x:Name="lines" Click="lines_Click" Height="45" Width="45" Background="{x:Null}"  HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Visible" Grid.Column="4" >
                     <Image Source="lines.png"></Image>
                 </Button>
+
             </Grid>
             <Button x:Name="del" Click="del_Click" Height="45" Width="90" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="1" >
                 Очистить лист
@@ -63,6 +64,9 @@
             <Button x:Name="color" Click="Color_Click" Height="90" Width="90" Background="{x:Null}" BorderBrush="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="2" >
                 <Image Source="gradient.png" Height="62" Width="70"></Image>
             </Button>
+            <Slider HorizontalAlignment="Left" Margin="584,22,0,0" VerticalAlignment="Top" Width="125" ValueChanged="Slider_ValueChanged" Maximum="100"/>
+            <TextBox HorizontalAlignment="Left" FontSize="10" Margin="600,2,0,0" Text="Толщина линии" VerticalAlignment="Top" Background="LightYellow" Width="94" BorderBrush="LightYellow"></TextBox>
+
         </Grid>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -120,9 +124,9 @@
                                          HorizontalAlignment="Center" VerticalAlignment="Center" SnapsToDevicePixels="True" BorderThickness="5,5,5,5" >
 
                 </controls:FormulaControl>
-                
+
             </InkCanvas>
-            
+
         </ScrollViewer>
         <Grid x:Name="grdFormula" Grid.Column="0" Grid.Row="2" Width="670" Background="Cornsilk" Visibility="Visible" Margin="0,0,0,0" >
             <TextBox Margin="10,10,10,50"
@@ -144,7 +148,7 @@
                 </Label.Style>
             </Label>
         </Grid>
-        
+
     </Grid>
-    
+
 </Window>

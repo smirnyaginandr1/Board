@@ -13,6 +13,9 @@ using WpfMath.Controls;
 using System.Windows.Media;
 using System.Windows.Forms;
 
+//Тут содержатся фигуры для рисования
+using System.Windows.Shapes;
+
 namespace WpfMath.Example
 {
     public partial class MainWindow : Window
@@ -23,7 +26,20 @@ namespace WpfMath.Example
         {
             InitializeComponent();
             newFormula.Height = 100;
+
         }
+        private State stateCursor = State.None;
+        private enum State{ 
+          Ellipse,
+          Rectangle,
+          Line,
+          Pen,
+          Eraser,
+          Graph,
+          None,
+          Formula
+        };
+
 
         private TexFormula? ParseFormula(string input, FormulaControl fc)
         {
@@ -135,22 +151,26 @@ namespace WpfMath.Example
         {
             newFormula = new FormulaControl();
             ParseFormula(InputTextBox.Text, newFormula);
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            setStateCursor(State.Eraser);
             ic.EditingMode = InkCanvasEditingMode.EraseByPoint;
+
         }
 
         private void pen_Click(object sender, RoutedEventArgs e)
         {
+            setStateCursor(State.Pen);
             ic.EditingMode = InkCanvasEditingMode.Ink;
         }
 
-        //TODO: Add color menu
         private void Color_Click(object sender, RoutedEventArgs e)
         {
+            if (stateCursor == State.Eraser)
+                return;
+
             ColorDialog dlg = new ColorDialog();
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -190,17 +210,40 @@ namespace WpfMath.Example
 
         private void formula_Click(object sender, RoutedEventArgs e)
         {
-
+            setStateCursor(State.Formula);
+            //TODO: add formula box
         }
-
+        Point point;
         private void graph_Click(object sender, RoutedEventArgs e)
         {
-
+            setStateCursor(State.Graph);
+            //TODO: add graph
         }
 
         private void lines_Click(object sender, RoutedEventArgs e)
         {
+            setStateCursor(State.Line);
+            //TODO: add line
+        }
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (e.NewValue < 1)
+            {
+                setSizeCursor(0.1);
+                return;
+            }
+            setSizeCursor(e.NewValue);
+        }
 
+        private void setStateCursor(State state)
+        {
+            this.stateCursor = state;
+        }
+
+        private void setSizeCursor(double value)
+        {
+            ic.DefaultDrawingAttributes.Width = value;
+            ic.DefaultDrawingAttributes.Height = value;
         }
     }
 }
