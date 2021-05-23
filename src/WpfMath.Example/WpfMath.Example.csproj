@@ -12,12 +12,17 @@
         <UseWindowsForms>true</UseWindowsForms>
     </PropertyGroup>
     <ItemGroup>
+      <None Remove="circle.png" />
       <None Remove="formula.png" />
       <None Remove="gradient.png" />
       <None Remove="graph.png" />
+      <None Remove="Krivaya.png" />
       <None Remove="lastik02.png" />
       <None Remove="lines.png" />
       <None Remove="pencil.png" />
+      <None Remove="prer.png" />
+      <None Remove="pryamaya.png" />
+      <None Remove="rectangle.png" />
     </ItemGroup>
     <ItemGroup>
       <COMReference Include="{215d64d2-031c-33c7-96e3-61794cd1ee61}">
@@ -43,6 +48,7 @@
       </PackageReference>
     </ItemGroup>
     <ItemGroup>
+      <Resource Include="circle.png" />
       <Resource Include="formula.png">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       </Resource>
@@ -52,6 +58,7 @@
       <Resource Include="graph.png">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       </Resource>
+      <Resource Include="Krivaya.png" />
       <Resource Include="lastik02.png">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       </Resource>
@@ -61,6 +68,9 @@
       <Resource Include="pencil.png">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       </Resource>
+      <Resource Include="prer.png" />
+      <Resource Include="pryamaya.png" />
+      <Resource Include="rectangle.png" />
     </ItemGroup>
     <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
       <PackageReference Include="System.Drawing.Common">

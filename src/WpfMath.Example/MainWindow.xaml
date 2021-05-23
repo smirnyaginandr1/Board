@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:WpfMath.Controls;assembly=WpfMath"
-        Title="MathBoard" Width="1000" Height="800"
+        Title="MathBoard" Width="900" Height="800"
         Closed="Window_Closed" WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded" >
     <Window.Resources>
@@ -23,49 +23,75 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
+            <Grid Grid.Column="0" Margin="0,3,165,0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="40*"/>
+
                 </Grid.ColumnDefinitions>
-
-                <Button x:Name="lastic" MouseDown="imgTL_MouseDown" Background="{x:Null}" Click="Button_Click" Height="45" Width="45" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Visible" Grid.Column="0">
-                    <Image Source="lastik02.png" Visibility="Visible" Width="auto" Height="auto" HorizontalAlignment="Left" VerticalAlignment="Center"></Image>
-                </Button>
-
-                <Button x:Name="pen" Click="pen_Click" Height="45" Width="45" Background="{x:Null}"  HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Visible" Grid.Column="1">
+                <Button x:Name="pen" Click="pen_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Grid.Column="0">
                     <Image Source="pencil.png"></Image>
                 </Button>
 
-                <Button x:Name="graph" Click="graph_Click" Height="45" Width="45" Background="{x:Null}"  HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Visible" Grid.Column="2">
+                <Button x:Name="rectangle_but" Click="rectangle_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Grid.Column="1" >
+                    <Image Source="rectangle.png"></Image>
+                </Button>
+
+                <Button x:Name="formula" Click="formula_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Grid.Column="2" >
+                    <Image Source="formula.png"></Image>
+                </Button>
+                <Button x:Name="polar_graph" Click="polar_graph_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Grid.Column="3" >
+                    <Image Source="graph.png"></Image>
+                </Button>
+                <Button x:Name="curved_line" Click="curved_line_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Grid.Column="4" >
+                    <Image Source="Krivaya.png"></Image>
+                </Button>
+            </Grid>
+            <Grid Grid.Column="0" Margin="0,40,165,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="30*"/>
+
+                </Grid.ColumnDefinitions>
+
+
+                <Button x:Name="lastic" MouseDown="imgTL_MouseDown" Background="{x:Null}" Click="Button_Click" Height="37" Width="37" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible"  Grid.Column="0">
+                    <Image Source="lastik02.png" Visibility="Visible" Width="auto" Height="auto" HorizontalAlignment="Left" VerticalAlignment="Center"></Image>
+                </Button>
+
+                <Button x:Name="circle" Click="circle_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="1" >
+                    <Image Source="circle.png"></Image>
+                </Button>
+
+                <Button x:Name="dec_graph" Click="dec_graph_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="3" >
                     <Image Source="graph.png"></Image>
                 </Button>
 
-                <Button x:Name="formula" Click="formula_Click" Height="45" Width="45" Background="{x:Null}"  HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Visible" Grid.Column="3" >
-                    <Image Source="formula.png"></Image>
-                </Button>
-
-                <Button x:Name="lines" Click="lines_Click" Height="45" Width="45" Background="{x:Null}"  HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Visible" Grid.Column="4" >
-                    <Image Source="lines.png"></Image>
+                <Button x:Name="pr_line" Click="line_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="4" >
+                    <Image Source="pryamaya.png"></Image>
                 </Button>
 
             </Grid>
-            <Button x:Name="del" Click="del_Click" Height="45" Width="90" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="1" >
+            <Button x:Name="del" Click="del_Click" Height="30" Width="90" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Grid.Column="1" Margin="0,45,0,0" >
                 Очистить лист
             </Button>
             <Button x:Name="color" Click="Color_Click" Height="90" Width="90" Background="{x:Null}" BorderBrush="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="2" >
                 <Image Source="gradient.png" Height="62" Width="70"></Image>
             </Button>
-            <Slider HorizontalAlignment="Left" Margin="584,22,0,0" VerticalAlignment="Top" Width="125" ValueChanged="Slider_ValueChanged" Maximum="100"/>
-            <TextBox HorizontalAlignment="Left" FontSize="10" Margin="600,2,0,0" Text="Толщина линии" VerticalAlignment="Top" Background="LightYellow" Width="94" BorderBrush="LightYellow"></TextBox>
+            <Border Background="{x:Null}" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" Margin="631,0,0,41">
+                <StackPanel Margin="-1,0,0,-1">
+                    <Slider Name="sizeSlider" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="125" ValueChanged="Slider_ValueChanged" Maximum="100" Grid.Column="1"/>
+                    <TextBox HorizontalAlignment="Center" FontSize="10" Text="Толщина линии" VerticalAlignment="Top" Background="LightYellow" Width="94" BorderBrush="LightYellow" Grid.Column="1"/>
+                </StackPanel>
+            </Border>
 
         </Grid>
         <Grid>
@@ -116,7 +142,7 @@
         </Grid>
 
         <ScrollViewer x:Name="sv1" Grid.Column="0" Grid.Row="1" VerticalScrollBarVisibility="Hidden">
-            <InkCanvas x:Name="ic" Height="auto" Cursor="Pen">
+            <InkCanvas x:Name="ic" Height="auto" Cursor="Pen" PreviewMouseLeftButtonDown="ic_MouseLeftButtonDown" PreviewMouseLeftButtonUp="ic_PreviewMouseLeftButtonUp" PreviewMouseMove="ic_PreviewMouseMove">
                 <controls:FormulaControl Name="Formula" Formula="{Binding Text, ElementName = InputTextBox, NotifyOnValidationError=True}"
 
                                          SelectionBrush="LightBlue"
