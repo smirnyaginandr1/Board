@@ -379,6 +379,7 @@ namespace WpfMath.Example
                     double widthEllipse = pointMouse.X - figureStart.X;
                     double heightEllipse = pointMouse.Y - figureStart.Y;
                     //TODO: при большом размере курсора недорисовывает маленький эллипс (обрезает)
+
                     if (widthEllipse >= 0 && heightEllipse >= 0)
                     {
                         ellipse.Width = widthEllipse;
@@ -386,25 +387,14 @@ namespace WpfMath.Example
                         return;
                     }
 
-                    if (widthEllipse < 0 && heightEllipse >= 0)
-                    {
-                        ellipse.Margin = new Thickness(pointMouse.X, figureStart.Y - 25, figureStart.X, pointMouse.Y - 25);
-                        ellipse.Width = figureStart.X - pointMouse.X;
-                        ellipse.Height = heightEllipse;
-                    }
-
-                    if (widthEllipse >= 0 && heightEllipse < 0)
-                    {
-                        ellipse.Margin = new Thickness(figureStart.X, pointMouse.Y - 25, pointMouse.X, figureStart.Y - 25);
-                        ellipse.Width = widthEllipse;
-                        ellipse.Height = figureStart.Y - pointMouse.Y;
-                    }
-                    if (widthEllipse < 0 && heightEllipse < 0)
-                    {
-                        ellipse.Margin = new Thickness(pointMouse.X, pointMouse.Y - 25, figureStart.X, figureStart.Y - 25);
-                        ellipse.Width = figureStart.X - pointMouse.X;
-                        ellipse.Height = figureStart.Y - pointMouse.Y;
-                    }
+                    ellipse.Margin = new Thickness(
+                        (widthEllipse < 0) ? pointMouse.X : figureStart.X,
+                        (heightEllipse < 0) ? pointMouse.Y - 25 : figureStart.Y - 25,
+                        (widthEllipse < 0) ? figureStart.X : pointMouse.X,
+                        (heightEllipse < 0) ? figureStart.Y - 25 : pointMouse.Y - 25);
+                    ellipse.Width = (widthEllipse < 0) ? figureStart.X - pointMouse.X : widthEllipse;
+                    ellipse.Height = (heightEllipse < 0) ? figureStart.Y - pointMouse.Y : heightEllipse;
+                   
                     break;
 
                 case State.Rectangle:
@@ -416,27 +406,15 @@ namespace WpfMath.Example
                         rectangle.Width = widthRectangle;
                         rectangle.Height = heightRectangle;
                         return;
-                    } 
-                    
-                    if (widthRectangle < 0 && heightRectangle >= 0)
-                    {
-                        rectangle.Margin = new Thickness(pointMouse.X, figureStart.Y - 25, figureStart.X, pointMouse.Y - 25);
-                        rectangle.Width = figureStart.X - pointMouse.X;
-                        rectangle.Height = heightRectangle;
                     }
 
-                    if (widthRectangle >= 0 && heightRectangle < 0)
-                    {
-                        rectangle.Margin = new Thickness(figureStart.X, pointMouse.Y - 25, pointMouse.X, figureStart.Y - 25);
-                        rectangle.Width = widthRectangle;
-                        rectangle.Height = figureStart.Y - pointMouse.Y;
-                    }
-                    if(widthRectangle < 0 && heightRectangle < 0)
-                    {
-                        rectangle.Margin = new Thickness(pointMouse.X, pointMouse.Y - 25, figureStart.X, figureStart.Y - 25);
-                        rectangle.Width = figureStart.X - pointMouse.X;
-                        rectangle.Height = figureStart.Y - pointMouse.Y;
-                    }
+                    rectangle.Margin = new Thickness(
+                         (widthRectangle < 0) ? pointMouse.X : figureStart.X,
+                         (heightRectangle < 0) ? pointMouse.Y - 25 : figureStart.Y - 25,
+                         (widthRectangle < 0) ? figureStart.X : pointMouse.X,
+                         (heightRectangle < 0) ? figureStart.Y - 25 : pointMouse.Y - 25);
+                    rectangle.Width = (widthRectangle < 0) ? figureStart.X - pointMouse.X : widthRectangle;
+                    rectangle.Height = (heightRectangle < 0) ? figureStart.Y - pointMouse.Y : heightRectangle;
                     break;
 
                 case State.Line:
