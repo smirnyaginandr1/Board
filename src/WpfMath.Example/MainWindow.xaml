@@ -14,10 +14,9 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="25*"></RowDefinition>
             <RowDefinition Height="580*" />
-            <RowDefinition Height="90*" />
             <RowDefinition Height="80*"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="grdSelect" Grid.Column="0" Grid.Row="3" Background="LightYellow">
+        <Grid x:Name="grdSelect" Grid.Column="0" Grid.Row="2" Background="LightYellow" Height="85" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="*"/>
@@ -150,31 +149,8 @@
                                          HorizontalAlignment="Center" VerticalAlignment="Center" SnapsToDevicePixels="True" BorderThickness="5,5,5,5" >
 
                 </controls:FormulaControl>
-
             </InkCanvas>
-
         </ScrollViewer>
-        <Grid x:Name="grdFormula" Grid.Column="0" Grid.Row="2" Width="670" Background="Cornsilk" Visibility="Visible" Margin="0,0,0,0" >
-            <TextBox Margin="10,10,10,50"
-                     x:Name="InputTextBox" SelectionChanged="inputTextBox_SelectionChanged" KeyDown="saveButton_Click" />
-            <Label Margin="10,42.9,21,10">
-                <Label.Style>
-                    <Style TargetType="{x:Type Label}">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding HasError, ElementName=Formula}" Value="False">
-                                <Setter Property="Content" Value="Верная формула" />
-                                <Setter Property="Foreground" Value="Green" />
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding HasError, ElementName=Formula}" Value="True">
-                                <Setter Property="Content" Value="{Binding Errors[0].Message, ElementName=Formula}" />
-                                <Setter Property="Foreground" Value="Red" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Label.Style>
-            </Label>
-        </Grid>
-
     </Grid>
 
 </Window>

@@ -8,8 +8,7 @@ using System.Windows.Ink;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
-using WpfMath.Converters;
-using WpfMath.Controls;
+
 using System.Windows.Media;
 using System.Windows.Forms;
 
@@ -27,10 +26,8 @@ namespace WpfMath.Example
         * 
         * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         */
-        private readonly TexFormulaParser _formulaParser = new TexFormulaParser();
-        public FormulaControl newFormula = new FormulaControl();
-        private Color allColor = new Color();
 
+        private Color allColor = new Color();
         private Point prev;
         private bool isPaint = false;
 
@@ -38,7 +35,6 @@ namespace WpfMath.Example
         private Rectangle rectangle;
         private Ellipse ellipse;
         private Line line;
-
 
         private double stroke = 0;
         private State stateCursor = State.Pen;
@@ -61,7 +57,6 @@ namespace WpfMath.Example
         public MainWindow()
         {
             InitializeComponent();
-            newFormula.Height = 100;
         }
         /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         * 
@@ -69,39 +64,8 @@ namespace WpfMath.Example
         * 
         * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         */
-        /*
-         * Парс строки
-         */
-        private TexFormula? ParseFormula(string input, FormulaControl fc)
-        {
-            // Create formula object from input text.
-            TexFormula? formula = null;
-            try
-            {
-                formula = this._formulaParser.Parse(input);
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show("An error occurred while parsing the given input:" + Environment.NewLine +
-                    Environment.NewLine + ex.Message, "WPF-Math Example", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+        
 
-            return formula;
-        }
-
-        /*
-         * Создание билдера для вставки в XAML
-         */
-        private string AddSVGHeader(string svgText)
-        {
-            var builder = new StringBuilder();
-            builder.AppendLine("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>")
-                .AppendLine("<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" >")
-                .AppendLine(svgText)
-                .AppendLine("</svg>");
-
-            return builder.ToString();
-        }
 
 
 
@@ -141,21 +105,12 @@ namespace WpfMath.Example
         * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         */
 
-        private void inputTextBox_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-            Formula.SelectionStart = InputTextBox.SelectionStart;
-            Formula.SelectionLength = InputTextBox.SelectionLength;
-        }
-        private void FormulaTextBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var item = (ComboBoxItem)((System.Windows.Controls.ComboBox)sender).SelectedItem;
-            InputTextBox.Text = (string)item.DataContext;
-        }
-
         private void imgTL_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            /*
             newFormula = new FormulaControl();
             ParseFormula(InputTextBox.Text, newFormula);
+            */ 
         }
 
         /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -164,57 +119,6 @@ namespace WpfMath.Example
          * 
          * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
          */
-
-        /*
-         * Клик на сохранение
-         */
-        private void saveButton_Click(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                // Choose file
-                Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog()
-                {
-                    Filter = "SVG Files (*.svg)|*.svg|PNG Files (*.png)|*.png"
-                };
-                var result = saveFileDialog.ShowDialog();
-                if (result == false) return;
-
-                // Create formula object from input text.
-                var formula = ParseFormula(InputTextBox.Text, Formula);
-                if (formula == null) return;
-                var renderer = formula.GetRenderer(TexStyle.Display, this.newFormula.Scale, "Arial");
-
-                // Open stream
-                var filename = saveFileDialog.FileName;
-                using (var stream = new FileStream(filename, FileMode.Create))
-                {
-                    switch (saveFileDialog.FilterIndex)
-                    {
-                        case 1:
-                            var geometry = renderer.RenderToGeometry(0, 0);
-                            var converter = new SVGConverter();
-                            var svgPathText = converter.ConvertGeometry(geometry);
-                            var svgText = AddSVGHeader(svgPathText);
-                            using (var writer = new StreamWriter(stream))
-                                writer.WriteLine(svgText);
-                            break;
-
-                        case 2:
-                            var bitmap = renderer.RenderToBitmap(0, 0, 300);
-                            var encoder = new PngBitmapEncoder
-                            {
-                                Frames = { BitmapFrame.Create(bitmap) }
-                            };
-                            encoder.Save(stream);
-                            break;
-
-                        default:
-                            return;
-                    }
-                }
-            }
-        }
 
         /*
          * Клик на ластик
@@ -253,7 +157,7 @@ namespace WpfMath.Example
         private void del_Click(object sender, RoutedEventArgs e)
         {
             this.ic.Strokes.Clear();
-            InputTextBox.Clear();
+            ic.Children.Clear();
         }
 
         /*
@@ -313,31 +217,44 @@ namespace WpfMath.Example
             setStroke(e.NewValue);
         }
 
+        /*
+         * Нажатие на прямоугольник
+         */
         private void rectangle_Click(object sender, RoutedEventArgs e)
         {
             setStateCursor(State.Rectangle);
         }
-
+        /*
+         * Нажатие на полярный график
+         */
         private void polar_graph_Click(object sender, RoutedEventArgs e)
         {
             setStateCursor(State.PolarGraph);
         }
-
+        /*
+         * Нажатие на линию
+         */
         private void line_Click(object sender, RoutedEventArgs e)
         {
             setStateCursor(State.Line);
         }
-
+        /*
+         * Нажатие на эллипс
+         */
         private void circle_Click(object sender, RoutedEventArgs e)
         {
             setStateCursor(State.Ellipse);
         }
-
+        /*
+         * Нажатие на график
+         */
         private void dec_graph_Click(object sender, RoutedEventArgs e)
         {
             setStateCursor(State.Graph);
         }
-
+        /*
+         * Нажатие на кривую линию
+         */
         private void curved_line_Click(object sender, RoutedEventArgs e)
         {
             setStateCursor(State.CurvedLine);
@@ -397,6 +314,19 @@ namespace WpfMath.Example
                     break;
 
                 case State.Formula:
+                    MathBoard.FormulaParserWindow pars = new MathBoard.FormulaParserWindow(mousePoint);
+                    pars.Owner = this;
+                    pars.ShowDialog();
+
+                    if (pars.savePng == null)
+                        return;
+                    Image image = new Image() { 
+                        Source = pars.savePng,
+                        Margin = new Thickness(mousePoint.X, mousePoint.Y - 25, 100, 100)
+                    };
+                    ic.Children.Add(image);
+                    pars.savePng = null;
+                    setStateCursor(State.None);
                     break;
             }
             isPaint = true;
@@ -448,32 +378,65 @@ namespace WpfMath.Example
                 case State.Ellipse:
                     double widthEllipse = pointMouse.X - figureStart.X;
                     double heightEllipse = pointMouse.Y - figureStart.Y;
-
-                    //TODO: изменить построение в обратную сторону (пока так хватит)
                     //TODO: при большом размере курсора недорисовывает маленький эллипс (обрезает)
-                    if (widthEllipse < 0)
-                        widthEllipse = figureStart.X - pointMouse.X;
+                    if (widthEllipse >= 0 && heightEllipse >= 0)
+                    {
+                        ellipse.Width = widthEllipse;
+                        ellipse.Height = heightEllipse;
+                        return;
+                    }
 
-                    if (heightEllipse < 0)
-                        heightEllipse = figureStart.Y - pointMouse.Y;
+                    if (widthEllipse < 0 && heightEllipse >= 0)
+                    {
+                        ellipse.Margin = new Thickness(pointMouse.X, figureStart.Y - 25, figureStart.X, pointMouse.Y - 25);
+                        ellipse.Width = figureStart.X - pointMouse.X;
+                        ellipse.Height = heightEllipse;
+                    }
 
-                    ellipse.Width = widthEllipse;
-                    ellipse.Height = heightEllipse;
+                    if (widthEllipse >= 0 && heightEllipse < 0)
+                    {
+                        ellipse.Margin = new Thickness(figureStart.X, pointMouse.Y - 25, pointMouse.X, figureStart.Y - 25);
+                        ellipse.Width = widthEllipse;
+                        ellipse.Height = figureStart.Y - pointMouse.Y;
+                    }
+                    if (widthEllipse < 0 && heightEllipse < 0)
+                    {
+                        ellipse.Margin = new Thickness(pointMouse.X, pointMouse.Y - 25, figureStart.X, figureStart.Y - 25);
+                        ellipse.Width = figureStart.X - pointMouse.X;
+                        ellipse.Height = figureStart.Y - pointMouse.Y;
+                    }
                     break;
 
                 case State.Rectangle:
                     double widthRectangle = pointMouse.X - figureStart.X;
                     double heightRectangle = pointMouse.Y - figureStart.Y;
 
-                    //TODO: изменить построение в обратную сторону (пока так хватит)
-                    if (widthRectangle < 0)
-                        widthRectangle = figureStart.X - pointMouse.X;
-
-                    if (heightRectangle < 0)
-                        heightRectangle = figureStart.Y - pointMouse.Y;
+                    if (widthRectangle >= 0 && heightRectangle >= 0)
+                    {
+                        rectangle.Width = widthRectangle;
+                        rectangle.Height = heightRectangle;
+                        return;
+                    } 
                     
-                    rectangle.Width = widthRectangle;
-                    rectangle.Height = heightRectangle;
+                    if (widthRectangle < 0 && heightRectangle >= 0)
+                    {
+                        rectangle.Margin = new Thickness(pointMouse.X, figureStart.Y - 25, figureStart.X, pointMouse.Y - 25);
+                        rectangle.Width = figureStart.X - pointMouse.X;
+                        rectangle.Height = heightRectangle;
+                    }
+
+                    if (widthRectangle >= 0 && heightRectangle < 0)
+                    {
+                        rectangle.Margin = new Thickness(figureStart.X, pointMouse.Y - 25, pointMouse.X, figureStart.Y - 25);
+                        rectangle.Width = widthRectangle;
+                        rectangle.Height = figureStart.Y - pointMouse.Y;
+                    }
+                    if(widthRectangle < 0 && heightRectangle < 0)
+                    {
+                        rectangle.Margin = new Thickness(pointMouse.X, pointMouse.Y - 25, figureStart.X, figureStart.Y - 25);
+                        rectangle.Width = figureStart.X - pointMouse.X;
+                        rectangle.Height = figureStart.Y - pointMouse.Y;
+                    }
                     break;
 
                 case State.Line:
