@@ -314,18 +314,29 @@ namespace WpfMath.Example
                     break;
 
                 case State.Formula:
-                    MathBoard.FormulaParserWindow pars = new MathBoard.FormulaParserWindow(mousePoint);
+                    MathBoard.FormulaParserWindow pars = new MathBoard.FormulaParserWindow();
                     pars.Owner = this;
                     pars.ShowDialog();
 
-                    if (pars.savePng == null)
+                    if (pars.imageCanvas.Source == null)
+                    {
+                        setStateCursor(State.None);
                         return;
-                    Image image = new Image() { 
+                    }
+
+                    if (pars.saveFlag)
+                    {
+                        setStateCursor(State.None);
+                        pars.imageCanvas = null;
+                        pars.saveFlag = false;
+                        return;
+                    }
+                    Image image = new Image()
+                    {
                         Source = pars.savePng,
                         Margin = new Thickness(mousePoint.X, mousePoint.Y - 25, 100, 100)
                     };
                     ic.Children.Add(image);
-                    pars.savePng = null;
                     setStateCursor(State.None);
                     break;
             }

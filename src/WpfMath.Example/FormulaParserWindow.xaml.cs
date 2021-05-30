@@ -21,67 +21,211 @@ namespace MathBoard
     /// </summary>
     public partial class FormulaParserWindow : Window
     {
-        private readonly TexFormulaParser _formulaParser = new TexFormulaParser();
-        public FormulaControl newFormula = new FormulaControl();
+        private String canvasString = "";
+       
+        private String templateSqrt = "\\sqrt[arg1]{arg2}	";
+        private String templateBinom = "\\binom{arg1}{arg2}";
+        private String templateDrob = "\\frac{arg1}{arg2}";
+        private String templatePow = "^{arg1}";
+        private String templateLow = "_{arg1}";
+        private String templateIntegral = "\\int_{arg1}^{arg2} arg3";
+        private String templateSum = "\\sum_{arg2}^{arg1} arg3";
+        private List<String> funcStr = new List<String> { "lim", "sqrt", "bin", "/", "^", "low", "int", "sum" };
+        private List<List<int>> table;
+        private TexFormulaParser formulaParser = new TexFormulaParser();
+
+        public Image imageCanvas;
+        public bool saveFlag;
         public BitmapSource savePng;
-        public FormulaParserWindow(Point mousePoint)
+        public FormulaParserWindow()
         {
             InitializeComponent();
-            newFormula.Height = 100;
             ic.EditingMode = InkCanvasEditingMode.None;
-        }
-        /*
-                 * Парс строки
-         */
-        public TexFormula? ParseFormula(string input, FormulaControl fc)
-        {
-            // Create formula object from input text.
-            TexFormula? formula = null;
-            try
-            {
-                if (input.Contains("^"))
-                {
-
-                }
-                formula = this._formulaParser.Parse(input);
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show("An error occurred while parsing the given input:" + Environment.NewLine +
-                    Environment.NewLine + ex.Message, "WPF-Math Example", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
-            return formula;
+            saveFlag = true;
+            imageCanvas = new Image() { };
+            ic.Children.Add(imageCanvas);
+            
         }
 
-        /*
-         * Создание билдера для вставки в XAML
-         */
-        private string AddSVGHeader(string svgText)
-        {
-            var builder = new StringBuilder();
-            builder.AppendLine("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>")
-                .AppendLine("<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" >")
-                .AppendLine(svgText)
-                .AppendLine("</svg>");
-
-            return builder.ToString();
-        }
-
-        private void inputTextBox_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-             Formula.SelectionStart = InputTextBox.SelectionStart;
-             Formula.SelectionLength = InputTextBox.SelectionLength;
-        }
 
         private void Button_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var formula = ParseFormula(InputTextBox.Text, Formula);
-            if (formula == null) return;
-            var renderer = formula.GetRenderer(TexStyle.Display, this.newFormula.Scale, "Arial");
-            savePng = renderer.RenderToBitmap(0, 0, 300);
+            saveFlag = false;
             this.Close();
         }
 
+        private void Parse_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            canvasString = InputTextBox.Text;
+            canvasString = canvasString.Replace(" ", "");
+            if (canvasString == "")
+            {
+                imageCanvas.Source = null;
+                return;
+            }
+
+            createTable();
+            if (ParseFormula())
+            {
+                imageCanvas.Source = null;
+                return;
+            }
+            TexFormula formula = formulaParser.Parse(canvasString);
+            TexRenderer renderer = formula.GetRenderer(TexStyle.Display, 20.0, "Arial");
+            savePng = renderer.RenderToBitmap(0.0, 0.0);
+            imageCanvas.Source = savePng;
+        }
+
+        private void createTable()
+        {
+            table = new List<List<int>>();
+            for (int i = 0; i < funcStr.Count; i++){
+                String copyStr = String.Copy(canvasString);
+                String str = funcStr[i];
+                table.Add(new List<int>());
+                int count = 0;
+                while (true)
+                {
+                    if (!copyStr.Contains(str))
+                        break;
+                    table[i].Add(copyStr.IndexOf(str) + (count * str.Length));
+                    count++;
+                    copyStr = copyStr.Remove(copyStr.IndexOf(str), str.Length);
+                }
+            }
+        }
+        private void reloadTable()
+        {
+            for (int i = 0; i < funcStr.Count; i++)
+            {
+                String copyStr = String.Copy(canvasString);
+                String str = funcStr[i];
+                int strCount = 0;
+                int count = 0;
+                while (true)
+                {
+                    if (!copyStr.Contains(str))
+                        break;
+                    table[i][strCount] = copyStr.IndexOf(str) + (count * str.Length);
+                    strCount++;
+                    count++;
+                    copyStr = copyStr.Remove(copyStr.IndexOf(str), str.Length);
+                }
+            }
+        }
+        private bool ParseFormula()
+        {
+            bool error = false;
+            int number = 0;
+            foreach (var str in funcStr)
+            {
+                for (int i = 0; i < table[number].Count; i++)
+                {
+                    switch (str)
+                    {
+                        case "lim":
+                            error = parseLim(table[number][i]);
+                            break;
+
+                        case "sqrt":
+                            error = parseSqrt(table[number][i]);
+                            break;
+
+                        case "bin":
+                            error = parseBin(table[number][i]);
+                            break;
+
+                        case "/":
+                            error = parseDrob(table[number][i]);
+                            break;
+
+                        case "^":
+                            error = parsePow(table[number][i]);
+                            break;
+                            
+                        case "low":
+                            error = parseLowIndex(table[number][i]);
+                            break;
+                            
+                        case "int":
+                            error = parseIntegr(table[number][i]);
+                            break;
+
+                        case "sum":
+                            error = parseSum(table[number][i]);
+                            break;
+                    }
+                    if (error)
+                    {
+                        labelStatus.Content = "Ошибка в " + str;
+                        return true;
+                    }
+                    reloadTable();
+                }
+                number++;
+            }
+            return false;
+        }
+        private bool parseLim(int position)
+        { 
+            String[] args = new string[3] { "", "", "" };
+            //Проверка на скобку после lim
+            if (canvasString[position + 3] != '(')
+                return true;
+            int countArg = 0;
+            for (int i = position + 4; i < canvasString.Length; i++)
+            {
+                if (canvasString[i] == ',' || canvasString[i] == ')')
+                {
+                    countArg++;
+                    if (countArg == args.Length)
+                        break;
+                    continue;
+                }
+                args[countArg] += canvasString[i];
+            }
+            // \\lim_{arg1 \\to arg2} arg3
+            canvasString = canvasString.Remove(position, 4 + args[0].Length + 3 + args[1].Length + args[2].Length);
+            canvasString = canvasString.Insert(position, "\\lim_{" + args[0] + " \\to " + args[1] + "} " + args[2]);
+            
+            return false;
+        }
+
+        private bool parseSqrt(int indexTableRow)
+        {
+            String arg1 = "", arg2 = "";
+            return false;
+        }
+
+        private bool parseBin(int indexTableRow)
+        {
+            String arg1 = "", arg2 = "";
+            return false;
+        }
+        private bool parseDrob(int indexTableRow)
+        {
+            String arg1 = "", arg2 = "";
+            return false;
+        }
+        private bool parsePow(int indexTableRow)
+        {
+            String arg1 = "", arg2 = "";
+            return false;
+        }
+        private bool parseLowIndex(int indexTableRow)
+        {
+            String arg1 = "", arg2 = "";
+            return false;
+        }
+        private bool parseIntegr(int indexTableRow)
+        {
+            String arg1 = "", arg2 = "", arg3 = "";
+            return false;
+        }
+        private bool parseSum(int indexTableRow)
+        {
+            String arg1 = "", arg2 = "", arg3 = "";
+            return false;
+        }
     }
 }
