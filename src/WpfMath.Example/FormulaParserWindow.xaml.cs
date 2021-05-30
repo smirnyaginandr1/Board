@@ -23,14 +23,8 @@ namespace MathBoard
     {
         private String canvasString = "";
        
-        private String templateSqrt = "\\sqrt[arg1]{arg2}	";
-        private String templateBinom = "\\binom{arg1}{arg2}";
-        private String templateDrob = "\\frac{arg1}{arg2}";
-        private String templatePow = "^{arg1}";
-        private String templateLow = "_{arg1}";
-        private String templateIntegral = "\\int_{arg1}^{arg2} arg3";
-        private String templateSum = "\\sum_{arg2}^{arg1} arg3";
-        private List<String> funcStr = new List<String> { "lim", "sqrt", "bin", "/", "^", "low", "int", "sum" };
+
+        private List<String> funcStr = new List<String> { "lim", "sqrt", "bin", "/", "pow", "low", "int", "sum" };
         private List<List<int>> table;
         private TexFormulaParser formulaParser = new TexFormulaParser();
 
@@ -121,39 +115,76 @@ namespace MathBoard
             {
                 for (int i = 0; i < table[number].Count; i++)
                 {
+                    String[] args;
                     switch (str)
                     {
                         case "lim":
-                            error = parseLim(table[number][i]);
+                            args = findArgs(str, table[number][i], 3);
+                            if (args == null)
+                            {
+                                error = true;
+                                break;
+                            }
+                            canvasString = canvasString.Remove(table[number][i], str.Length + 1 + args[0].Length + 3 + args[1].Length + args[2].Length);
+                            canvasString = canvasString.Insert(table[number][i], "\\lim_{" + args[0] + " \\to " + args[1] + "} " + "(" + args[2] + ")");
                             break;
 
                         case "sqrt":
-                            error = parseSqrt(table[number][i]);
+                            args = findArgs(str, table[number][i], 2);
+                            if (args == null)
+                            {
+                                error = true;
+                                break;
+                            }
+                            canvasString = canvasString.Remove(table[number][i], str.Length + 1 + args[0].Length + 1 + args[1].Length + 1);
+                            canvasString = canvasString.Insert(table[number][i], "\\sqrt[" + args[0] + "]{" + args[1] + "}");
                             break;
 
                         case "bin":
-                            error = parseBin(table[number][i]);
+                            args = findArgs(str, table[number][i], 2);
+                            if (args == null)
+                            {
+                                error = true;
+                                break;
+                            }
+                            canvasString = canvasString.Remove(table[number][i], str.Length + 1 + args[0].Length + 1 + args[1].Length + 1);
+                            canvasString = canvasString.Insert(table[number][i], "\\binom{" + args[0] + "}{" + args[1] + "}");
                             break;
 
+                        case "int":
+                            args = findArgs(str, table[number][i], 3);
+                            if (args == null)
+                            {
+                                error = true;
+                                break;
+                            }
+                            canvasString = canvasString.Remove(table[number][i], str.Length + 1 + args[0].Length + 1 + args[1].Length + 1 + args[2].Length + 1);
+                            canvasString = canvasString.Insert(table[number][i], "\\int_{" + args[0] + "}^{" + args[1] + "} (" + args[2] + ")");
+                            break;
+
+                        case "sum":
+                            args = findArgs(str, table[number][i], 3);
+                            if (args == null)
+                            {
+                                error = true;
+                                break;
+                            }
+                            canvasString = canvasString.Remove(table[number][i], str.Length + 1 + args[0].Length + 1 + args[1].Length + 1 + args[2].Length + 1);
+                            canvasString = canvasString.Insert(table[number][i], "\\sum_{" + args[0] + "}^{" + args[1] + "} (" + args[2] + ")");
+                            break;
                         case "/":
                             error = parseDrob(table[number][i]);
                             break;
 
-                        case "^":
+                        case "pow":
                             error = parsePow(table[number][i]);
                             break;
-                            
+
                         case "low":
                             error = parseLowIndex(table[number][i]);
                             break;
                             
-                        case "int":
-                            error = parseIntegr(table[number][i]);
-                            break;
-
-                        case "sum":
-                            error = parseSum(table[number][i]);
-                            break;
+                        
                     }
                     if (error)
                     {
@@ -166,65 +197,51 @@ namespace MathBoard
             }
             return false;
         }
-        private bool parseLim(int position)
-        { 
-            String[] args = new string[3] { "", "", "" };
-            //Проверка на скобку после lim
-            if (canvasString[position + 3] != '(')
-                return true;
-            int countArg = 0;
-            for (int i = position + 4; i < canvasString.Length; i++)
+        private String[] findArgs(String func, int position, int argsQuantity)
+        {
+            String[] args = new string[argsQuantity];
+            for (int i = 0; i < argsQuantity; i++)
+                args[i] = "";
+
+            if (position + func.Length >= canvasString.Length)
+                return null;
+
+            if (canvasString[position + func.Length] != '(')
+                return null;
+
+            int countArg = 0, bracketCount = 0;
+            for (int i = position + func.Length + 1; i < canvasString.Length; i++)
             {
-                if (canvasString[i] == ',' || canvasString[i] == ')')
+                if (canvasString[i] == '(')
+                    bracketCount++;
+
+                if ((canvasString[i] == ',' || canvasString[i] == ')') && bracketCount == 0)
                 {
                     countArg++;
                     if (countArg == args.Length)
                         break;
                     continue;
                 }
+                if (canvasString[i] == ')' && bracketCount != 0)
+                    bracketCount--;
                 args[countArg] += canvasString[i];
             }
-            // \\lim_{arg1 \\to arg2} arg3
-            canvasString = canvasString.Remove(position, 4 + args[0].Length + 3 + args[1].Length + args[2].Length);
-            canvasString = canvasString.Insert(position, "\\lim_{" + args[0] + " \\to " + args[1] + "} " + args[2]);
-            
-            return false;
+            foreach(var arg in args)
+                if(arg == "")
+                    return null;
+            return args;
         }
 
-        private bool parseSqrt(int indexTableRow)
-        {
-            String arg1 = "", arg2 = "";
+        private bool parseDrob(int position)
+        {//"\\frac{arg1}{arg2}"
             return false;
         }
-
-        private bool parseBin(int indexTableRow)
-        {
-            String arg1 = "", arg2 = "";
+        private bool parsePow(int position)
+        {//"^{arg1}"
             return false;
         }
-        private bool parseDrob(int indexTableRow)
-        {
-            String arg1 = "", arg2 = "";
-            return false;
-        }
-        private bool parsePow(int indexTableRow)
-        {
-            String arg1 = "", arg2 = "";
-            return false;
-        }
-        private bool parseLowIndex(int indexTableRow)
-        {
-            String arg1 = "", arg2 = "";
-            return false;
-        }
-        private bool parseIntegr(int indexTableRow)
-        {
-            String arg1 = "", arg2 = "", arg3 = "";
-            return false;
-        }
-        private bool parseSum(int indexTableRow)
-        {
-            String arg1 = "", arg2 = "", arg3 = "";
+        private bool parseLowIndex(int position)
+        {//"_{arg1}"
             return false;
         }
     }
