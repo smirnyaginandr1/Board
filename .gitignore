@@ -243,3 +243,4 @@ src/WpfMath/obj/
 src/WpfMath.Example/obj/
 
 *.suo
+.dtbcache*
