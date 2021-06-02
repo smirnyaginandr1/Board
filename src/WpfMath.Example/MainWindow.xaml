@@ -33,21 +33,21 @@
 
                 </Grid.ColumnDefinitions>
                 <Button x:Name="pen" Click="pen_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Grid.Column="0">
-                    <Image Source="pencil.png"></Image>
+                    <Image Source="/Resources/pencil.png"></Image>
                 </Button>
 
                 <Button x:Name="rectangle_but" Click="rectangle_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Grid.Column="1" >
-                    <Image Source="rectangle.png"></Image>
+                    <Image Source="/Resources/rectangle.png"></Image>
                 </Button>
 
                 <Button x:Name="formula" Click="formula_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Grid.Column="2" >
-                    <Image Source="formula.png"></Image>
+                    <Image Source="/Resources/formula.png"></Image>
                 </Button>
                 <Button x:Name="polar_graph" Click="polar_graph_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Grid.Column="3" >
-                    <Image Source="graph.png"></Image>
+                    <Image Source="/Resources/graph.png"></Image>
                 </Button>
                 <Button x:Name="curved_line" Click="curved_line_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Grid.Column="4" >
-                    <Image Source="Krivaya.png"></Image>
+                    <Image Source="/Resources/Krivaya.png"></Image>
                 </Button>
             </Grid>
             <Grid Grid.Column="0" Margin="0,40,165,0">
@@ -63,19 +63,19 @@
 
 
                 <Button x:Name="lastic" MouseDown="imgTL_MouseDown" Background="{x:Null}" Click="Button_Click" Height="37" Width="37" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible"  Grid.Column="0">
-                    <Image Source="lastik02.png" Visibility="Visible" Width="auto" Height="auto" HorizontalAlignment="Left" VerticalAlignment="Center"></Image>
+                    <Image Source="/Resources/lastik02.png" Visibility="Visible" Width="auto" Height="auto" HorizontalAlignment="Left" VerticalAlignment="Center"></Image>
                 </Button>
 
                 <Button x:Name="circle" Click="circle_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="1" >
-                    <Image Source="circle.png"></Image>
+                    <Image Source="/Resources/circle.png"></Image>
                 </Button>
 
                 <Button x:Name="dec_graph" Click="dec_graph_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="3" >
-                    <Image Source="graph.png"></Image>
+                    <Image Source="/Resources/graph.png"></Image>
                 </Button>
 
                 <Button x:Name="pr_line" Click="line_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="4" >
-                    <Image Source="pryamaya.png"></Image>
+                    <Image Source="/Resources/pryamaya.png"></Image>
                 </Button>
 
             </Grid>
@@ -83,7 +83,7 @@
                 Очистить лист
             </Button>
             <Button x:Name="color" Click="Color_Click" Height="90" Width="90" Background="{x:Null}" BorderBrush="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="2" >
-                <Image Source="gradient.png" Height="62" Width="70"></Image>
+                <Image Source="/Resources/gradient.png" Height="62" Width="70"></Image>
             </Button>
             <Border Background="{x:Null}" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" Margin="631,0,0,41">
                 <StackPanel Margin="-1,0,0,-1">

@@ -15,6 +15,7 @@ using System.Windows.Forms;
 //Тут содержатся фигуры для рисования
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using MathBoard;
 
 namespace WpfMath.Example
 {
@@ -31,6 +32,12 @@ namespace WpfMath.Example
         private Point prev;
         private bool isPaint = false;
 
+        const double STEP = 0.1d;
+        const double START_X = -10d;
+        const double END_X = 10d;
+        private static string MathExpression { get; set; }
+        private Point mousePoint1;
+
         private Point figureStart;
         private Rectangle rectangle;
         private Ellipse ellipse;
@@ -38,17 +45,18 @@ namespace WpfMath.Example
 
         private double stroke = 0;
         private State stateCursor = State.Pen;
-        private enum State{ 
-          Ellipse,
-          Rectangle,
-          Line,
-          CurvedLine,
-          Pen,
-          Eraser,
-          Graph,
-          PolarGraph,
-          None,
-          Formula
+        private enum State
+        {
+            Ellipse,
+            Rectangle,
+            Line,
+            CurvedLine,
+            Pen,
+            Eraser,
+            Graph,
+            PolarGraph,
+            None,
+            Formula
         };
 
         /*
@@ -64,9 +72,97 @@ namespace WpfMath.Example
         * 
         * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         */
-        
 
 
+        private void DrawFunctionGraph(List<Point> points)
+        {
+            points = PerformTransformation(points);
+
+            for (int i = 0; i < points.Count - 1; i++)
+            {
+                Point firstPoint = points[i];
+                Point secondPoint = points[i + 1];
+
+                if (!IsValid(firstPoint) || !IsValid(secondPoint)) { continue; }
+
+                SolidColorBrush color = new SolidColorBrush(System.Windows.Media.Colors.Green);
+
+                AddNewLineToCanvas(firstPoint.X, firstPoint.Y, secondPoint.X, secondPoint.Y, color, 4);
+            }
+        }
+
+        private List<Point> PerformTransformation(List<Point> points)
+        {
+            double canvasHalfWidth = 400 / 2;
+            double canvasHalfHeight = 400 / 2;
+
+            Point scalingPoint = Settings.Plane.GetDimensions();
+
+            double horizontalScale = 400 / scalingPoint.X;
+            double vertcalScale = 400 / scalingPoint.Y;
+
+            MathBoard.Matrix.InitialiseTranslation(canvasHalfWidth, canvasHalfHeight);
+            MathBoard.Matrix.InitialiseScaling(horizontalScale, vertcalScale);
+            MathBoard.Matrix.FlipVertically = true;
+            MathBoard.Matrix.Rebuild();
+
+            return MathBoard.Matrix.PerformTransformation(points);
+        }
+
+        private void AddNewLineToCanvas(double x1, double y1, double x2, double y2, SolidColorBrush color, double strokeThickness = 1)
+        {
+            var mousePoint = Mouse.GetPosition(this);
+
+            Line line = new Line();
+            line.Margin = new Thickness(mousePoint1.X, mousePoint1.Y - 25, 100, 100);
+            line.Stroke = color;
+            line.StrokeThickness = strokeThickness;
+            line.X1 = x1;
+            line.Y1 = y1;
+            line.X2 = x2;
+            line.Y2 = y2;
+
+            ic.Children.Add(line);
+        }
+
+        private bool IsValid(Point point)
+        {
+            bool isNumber = !double.IsNaN(point.X) && !double.IsNaN(point.Y);
+            bool isFinite = !double.IsInfinity(point.X) && !double.IsInfinity(point.Y);
+
+            return isNumber && isFinite;
+        }
+
+        private void DrawCoordinatePlane()
+        {
+            Point dimensions = Settings.Plane.GetDimensions();
+
+            double horizontalMiddle = dimensions.X / 2;
+            double verticalMiddle = dimensions.Y / 2;
+
+            //Размер графика
+            double width = 400;
+            double height = 400;
+
+            double horizontalOffset = (width - 1) / dimensions.X;
+            double verticalOffset = (height - 1) / dimensions.Y;
+
+            for (int i = 0; i <= dimensions.X; i++)
+            {
+                double step = i * verticalOffset + 1;
+                double strokeThickness = i == horizontalMiddle ? 4 : Settings.Line.DefaultStrokeThickness;
+
+                AddNewLineToCanvas(0, step, width, step, Settings.Line.Color, strokeThickness);
+            }
+
+            for (int i = 0; i <= dimensions.Y; i++)
+            {
+                double step = i * horizontalOffset + 1;
+                double strokeThickness = i == verticalMiddle ? 4 : Settings.Line.DefaultStrokeThickness;
+
+                AddNewLineToCanvas(step, 0, step, height, Settings.Line.Color, strokeThickness);
+            }
+        }
 
 
         /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -110,7 +206,7 @@ namespace WpfMath.Example
             /*
             newFormula = new FormulaControl();
             ParseFormula(InputTextBox.Text, newFormula);
-            */ 
+            */
         }
 
         /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -305,12 +401,43 @@ namespace WpfMath.Example
                 case State.Eraser:
                     if (isPaint) return;
 
-                    var lineEraser = getNewLine(mousePoint, mousePoint, Color.FromRgb(255,255,255));
+                    var lineEraser = getNewLine(mousePoint, mousePoint, Color.FromRgb(255, 255, 255));
                     prev = mousePoint;
                     ic.Children.Add(lineEraser);
                     break;
 
                 case State.Graph:
+
+                    mousePoint1 = mousePoint;
+
+                    MathBoard.FormulaParserWindow parsG = new MathBoard.FormulaParserWindow(mousePoint);
+                    parsG.Owner = this;
+                    parsG.ShowDialog();
+                    string formula = parsG.InputTextBox.Text;
+
+                    List<Point> points = new List<Point>();
+                    MathParser mp = new MathParser(Mode.GRAD);
+                    MathExpression = formula;
+                    for (double i = START_X; i <= END_X; i += STEP)
+                    {
+                        string temp = MathExpression.Replace("x", i.ToString());
+                        if (!mp.Evaluate(temp))
+                        {
+                        }
+                        else
+                        {
+                            if ((mp.Result < 10 && mp.Result > -10) && (i < 10 && i > -10))
+                            {
+                                Point point = new Point(i, mp.Result);
+                                points.Add(point);
+                            }
+                        }
+                    }
+                    DrawCoordinatePlane();
+                    DrawFunctionGraph(points);
+
+                    setStateCursor(State.None);
+
                     break;
 
                 case State.Formula:
@@ -320,7 +447,8 @@ namespace WpfMath.Example
 
                     if (pars.savePng == null)
                         return;
-                    Image image = new Image() { 
+                    Image image = new Image()
+                    {
                         Source = pars.savePng,
                         Margin = new Thickness(mousePoint.X, mousePoint.Y - 25, 100, 100)
                     };
@@ -394,7 +522,7 @@ namespace WpfMath.Example
                         (heightEllipse < 0) ? figureStart.Y - 25 : pointMouse.Y - 25);
                     ellipse.Width = (widthEllipse < 0) ? figureStart.X - pointMouse.X : widthEllipse;
                     ellipse.Height = (heightEllipse < 0) ? figureStart.Y - pointMouse.Y : heightEllipse;
-                   
+
                     break;
 
                 case State.Rectangle:
@@ -513,7 +641,7 @@ namespace WpfMath.Example
                 Width = 0,
                 Margin = new Thickness(pointOne.X, pointOne.Y - 25, pointTwo.X, pointTwo.Y - 25),
                 StrokeThickness = getStroke()
-                
+
             };
         }
 
