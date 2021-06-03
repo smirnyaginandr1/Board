@@ -8,6 +8,8 @@
     <Window.Resources>
     </Window.Resources>
     <Grid>
+
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -142,13 +144,6 @@
 
         <ScrollViewer x:Name="sv1" Grid.Column="0" Grid.Row="1" VerticalScrollBarVisibility="Hidden">
             <InkCanvas x:Name="ic" Height="auto" Cursor="Pen" PreviewMouseLeftButtonDown="ic_MouseLeftButtonDown" PreviewMouseLeftButtonUp="ic_PreviewMouseLeftButtonUp" PreviewMouseMove="ic_PreviewMouseMove">
-                <controls:FormulaControl Name="Formula" Formula="{Binding Text, ElementName = InputTextBox, NotifyOnValidationError=True}"
-
-                                         SelectionBrush="LightBlue"
-                                         SystemTextFontName="Arial"
-                                         HorizontalAlignment="Center" VerticalAlignment="Center" SnapsToDevicePixels="True" BorderThickness="5,5,5,5" >
-
-                </controls:FormulaControl>
             </InkCanvas>
         </ScrollViewer>
     </Grid>

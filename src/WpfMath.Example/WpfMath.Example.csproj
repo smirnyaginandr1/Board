@@ -19,6 +19,7 @@
       <None Remove="Krivaya.png" />
       <None Remove="lastik02.png" />
       <None Remove="lines.png" />
+      <None Remove="myImage.jpg" />
       <None Remove="pencil.png" />
       <None Remove="prer.png" />
       <None Remove="pryamaya.png" />
@@ -65,6 +66,7 @@
       <Resource Include="lines.png">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       </Resource>
+      <Resource Include="myImage.jpg" />
       <Resource Include="pencil.png">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       </Resource>

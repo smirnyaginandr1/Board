@@ -48,6 +48,22 @@ namespace MathBoard
             this.Close();
         }
 
+        private TexFormula? Parse_Formula(string input)
+        {
+            // Create formula object from input text.
+            TexFormula? formula = null;
+            try
+            {
+                formula = this.formulaParser.Parse(input);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка ввода");
+            }
+
+            return formula;
+        }
+
         private void Parse_MouseDown(object sender, MouseButtonEventArgs e)
         {
             canvasString = InputTextBox.Text;
@@ -64,7 +80,9 @@ namespace MathBoard
                 imageCanvas.Source = null;
                 return;
             }
-            TexFormula formula = formulaParser.Parse(canvasString);
+            TexFormula formula = Parse_Formula(canvasString);
+            if (formula == null)
+                return;
             TexRenderer renderer = formula.GetRenderer(TexStyle.Display, 20.0, "Arial");
             savePng = renderer.RenderToBitmap(0.0, 0.0);
             imageCanvas.Source = savePng;
@@ -115,6 +133,7 @@ namespace MathBoard
             {
                 for (int i = 0; i < table[number].Count; i++)
                 {
+                    int position = table[number][i];
                     String[] args;
                     switch (str)
                     {
@@ -125,70 +144,157 @@ namespace MathBoard
                                 error = true;
                                 break;
                             }
-                            canvasString = canvasString.Remove(table[number][i], str.Length + 1 + args[0].Length + 3 + args[1].Length + args[2].Length);
-                            canvasString = canvasString.Insert(table[number][i], "\\lim_{" + args[0] + " \\to " + args[1] + "} " + "(" + args[2] + ")");
+                            canvasString = canvasString.Remove(position, str.Length + 1 + args[0].Length + 3 + args[1].Length + args[2].Length);
+                            canvasString = canvasString.Insert(position, "\\lim_{" + args[0] + "\\to" + args[1] + "}" + "(" + args[2] + ")");
                             break;
 
                         case "sqrt":
-                            args = findArgs(str, table[number][i], 2);
+                            args = findArgs(str, position, 2);
                             if (args == null)
                             {
                                 error = true;
                                 break;
                             }
-                            canvasString = canvasString.Remove(table[number][i], str.Length + 1 + args[0].Length + 1 + args[1].Length + 1);
-                            canvasString = canvasString.Insert(table[number][i], "\\sqrt[" + args[0] + "]{" + args[1] + "}");
+                            canvasString = canvasString.Remove(position, str.Length + 1 + args[0].Length + 1 + args[1].Length + 1);
+                            canvasString = canvasString.Insert(position, "\\sqrt[" + args[0] + "]{" + args[1] + "}");
                             break;
 
                         case "bin":
-                            args = findArgs(str, table[number][i], 2);
+                            args = findArgs(str, position, 2);
                             if (args == null)
                             {
                                 error = true;
                                 break;
                             }
-                            canvasString = canvasString.Remove(table[number][i], str.Length + 1 + args[0].Length + 1 + args[1].Length + 1);
-                            canvasString = canvasString.Insert(table[number][i], "\\binom{" + args[0] + "}{" + args[1] + "}");
+                            canvasString = canvasString.Remove(position, str.Length + 1 + args[0].Length + 1 + args[1].Length + 1);
+                            canvasString = canvasString.Insert(position, "\\binom{" + args[0] + "}{" + args[1] + "}");
                             break;
 
                         case "int":
-                            args = findArgs(str, table[number][i], 3);
+                            args = findArgs(str, position, 3);
                             if (args == null)
                             {
                                 error = true;
                                 break;
                             }
-                            canvasString = canvasString.Remove(table[number][i], str.Length + 1 + args[0].Length + 1 + args[1].Length + 1 + args[2].Length + 1);
-                            canvasString = canvasString.Insert(table[number][i], "\\int_{" + args[0] + "}^{" + args[1] + "} (" + args[2] + ")");
+                            canvasString = canvasString.Remove(position, str.Length + 1 + args[0].Length + 1 + args[1].Length + 1 + args[2].Length + 1);
+                            canvasString = canvasString.Insert(position, "\\int_{" + args[0] + "}^{" + args[1] + "}(" + args[2] + ")");
                             break;
 
                         case "sum":
-                            args = findArgs(str, table[number][i], 3);
+                            args = findArgs(str, position, 3);
                             if (args == null)
                             {
                                 error = true;
                                 break;
                             }
-                            canvasString = canvasString.Remove(table[number][i], str.Length + 1 + args[0].Length + 1 + args[1].Length + 1 + args[2].Length + 1);
-                            canvasString = canvasString.Insert(table[number][i], "\\sum_{" + args[0] + "}^{" + args[1] + "} (" + args[2] + ")");
+                            canvasString = canvasString.Remove(position, str.Length + 1 + args[0].Length + 1 + args[1].Length + 1 + args[2].Length + 1);
+                            canvasString = canvasString.Insert(position, "\\sum_{" + args[0] + "}^{" + args[1] + "} (" + args[2] + ")");
                             break;
                         case "/":
-                            error = parseDrob(table[number][i]);
+                            if (position + 1 >= canvasString.Length || position == 0)
+                            {
+                                error = true;
+                                break;
+                            }
+                            if (canvasString[position + 1] == '(')
+                            {
+                                args = findArgs(str, table[number][i], 1);
+                                if (args == null)
+                                {
+                                    error = true;
+                                    break;
+                                }
+                            }
+                            else
+                                args = new string[] { canvasString[position + 1].ToString() };
+
+
+                            String backArg;
+
+                            if (canvasString[position - 1] == ')')
+                                backArg = findBackArgs(position);
+                            else //"\\frac{arg1}{arg2}"
+                                backArg = canvasString[position - 1].ToString();
+
+                            if (backArg == "" || backArg == null)
+                            {
+                                error = true;
+                                break;
+                            }
+
+                            if (canvasString[position - 1] == ')' && canvasString[position + 1] == '(')
+                            {
+                                canvasString = canvasString.Remove(position - 2 - backArg.Length,
+                                    1 + 2 + args[0].Length + 2 + backArg.Length);
+                                canvasString = canvasString.Insert(position - 2 - backArg.Length, "\\frac{" + backArg + "}{" + args[0] + "}");
+                            }
+                            else if (canvasString[position - 1] != ')' && canvasString[position + 1] == '(')
+                            {
+                                canvasString = canvasString.Remove(position - 1,
+                                    1 + 2 + args[0].Length + 1);
+                                canvasString = canvasString.Insert(position - 1, "\\frac{" + backArg + "}{" + args[0] + "}");
+                            }
+                            else if (canvasString[position - 1] == ')' && canvasString[position + 1] != '(')
+                            {
+                                canvasString = canvasString.Remove(position - 2 - backArg.Length,
+                                    1 + 2 + backArg.Length + 1);
+                                canvasString = canvasString.Insert(position - 2 - backArg.Length, "\\frac{" + backArg + "}{" + args[0] + "}");
+                            }
+                            else
+                            {
+                                canvasString = canvasString.Remove(position - 1, 3);
+                                canvasString = canvasString.Insert(position - 1, "\\frac{" + backArg + "}{" + args[0] + "}");
+                            }
                             break;
 
                         case "pow":
-                            error = parsePow(table[number][i]);
+                            args = findArgs(str, position, 1);
+                            if (args == null)
+                            {
+                                error = true;
+                                break;
+                            }
+                            canvasString = canvasString.Remove(position, str.Length + 1 + args[0].Length + 1);
+                            canvasString = canvasString.Insert(position, "^{" + args[0] + "}");
                             break;
+                        //if (position + 1 >= canvasString.Length || position == 0)
+                        //{
+                        //    error = true;
+                        //    break;
+                        //}
+                        //if (canvasString[position + 1] == '(')
+                        //{
+                        //    args = findArgs(str, position, 1);
+                        //    if (args == null)
+                        //    {
+                        //        error = true;
+                        //        break;
+                        //    }
+                        //    canvasString = canvasString.Remove(position, str.Length + 1 + args[0].Length + 1);
+                        //    canvasString = canvasString.Insert(position, "^{" + args[0] + "}");
+                        //}
+                        //break;
 
                         case "low":
-                            error = parseLowIndex(table[number][i]);
+                            args = findArgs(str, position, 1);
+                            if (args == null)
+                            {
+                                error = true;
+                                break;
+                            }
+                            canvasString = canvasString.Remove(position, str.Length + 1 + args[0].Length + 1);
+                            canvasString = canvasString.Insert(position, "_{" + args[0] + "}");
                             break;
-                            
-                        
+
+
                     }
                     if (error)
                     {
-                        labelStatus.Content = "Ошибка в " + str;
+                        if (str == "/")
+                            labelStatus.Content = "Ошибка в делении";
+                        else 
+                            labelStatus.Content = "Ошибка в " + str;
                         return true;
                     }
                     reloadTable();
@@ -205,9 +311,10 @@ namespace MathBoard
 
             if (position + func.Length >= canvasString.Length)
                 return null;
-
+            char a;
             if (canvasString[position + func.Length] != '(')
-                return null;
+                a = canvasString[26];
+                //return null;
 
             int countArg = 0, bracketCount = 0;
             for (int i = position + func.Length + 1; i < canvasString.Length; i++)
@@ -232,17 +339,27 @@ namespace MathBoard
             return args;
         }
 
-        private bool parseDrob(int position)
-        {//"\\frac{arg1}{arg2}"
-            return false;
-        }
-        private bool parsePow(int position)
-        {//"^{arg1}"
-            return false;
-        }
-        private bool parseLowIndex(int position)
-        {//"_{arg1}"
-            return false;
+        private String findBackArgs(int position)
+        {
+            String finalStr = "";
+            
+            int bracketCount = 0;
+            for (int i = position - 2; i >= 0; i--)
+            {
+                if (canvasString[i] == ')')
+                    bracketCount++;
+
+                if (canvasString[i] == '(' && bracketCount == 0)
+                {
+                    char[] arr = finalStr.ToCharArray();
+                    Array.Reverse(arr);
+                    return new string(arr);
+                }
+                if (canvasString[i] == '(' && bracketCount != 0)
+                    bracketCount--;
+                finalStr += canvasString[i];
+            }
+            return null;
         }
     }
 }

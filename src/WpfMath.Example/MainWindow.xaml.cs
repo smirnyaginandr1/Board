@@ -45,6 +45,7 @@ namespace WpfMath.Example
           CurvedLine,
           Pen,
           Eraser,
+          Image,
           Graph,
           PolarGraph,
           None,
@@ -338,6 +339,9 @@ namespace WpfMath.Example
                     };
                     ic.Children.Add(image);
                     setStateCursor(State.None);
+                    break;
+                case State.Image:
+
                     break;
             }
             isPaint = true;
