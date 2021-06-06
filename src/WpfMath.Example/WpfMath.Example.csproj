@@ -12,18 +12,18 @@
         <UseWindowsForms>true</UseWindowsForms>
     </PropertyGroup>
     <ItemGroup>
-      <None Remove="circle.png" />
-      <None Remove="formula.png" />
-      <None Remove="gradient.png" />
-      <None Remove="graph.png" />
-      <None Remove="Krivaya.png" />
-      <None Remove="lastik02.png" />
-      <None Remove="lines.png" />
-      <None Remove="myImage.jpg" />
-      <None Remove="pencil.png" />
-      <None Remove="prer.png" />
-      <None Remove="pryamaya.png" />
-      <None Remove="rectangle.png" />
+      <None Remove="Resources\circle.png" />
+      <None Remove="Resources\formula.png" />
+      <None Remove="Resources\gradient.png" />
+      <None Remove="Resources\graph.png" />
+      <None Remove="Resources\Krivaya.png" />
+      <None Remove="Resources\lastik02.png" />
+      <None Remove="Resources\lines.png" />
+      <None Remove="Resources\pencil.png" />
+      <None Remove="Resources\prer.png" />
+      <None Remove="Resources\pryamaya.png" />
+      <None Remove="Resources\rectangle.png" />
+      <None Remove="Resources\_.png" />
     </ItemGroup>
     <ItemGroup>
       <COMReference Include="{215d64d2-031c-33c7-96e3-61794cd1ee61}">
@@ -49,30 +49,30 @@
       </PackageReference>
     </ItemGroup>
     <ItemGroup>
-      <Resource Include="circle.png" />
-      <Resource Include="formula.png">
+      <Resource Include="Resources\circle.png" />
+      <Resource Include="Resources\formula.png">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="gradient.png">
+      <Resource Include="Resources\gradient.png">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="graph.png">
+      <Resource Include="Resources\graph.png">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="Krivaya.png" />
-      <Resource Include="lastik02.png">
+      <Resource Include="Resources\Krivaya.png" />
+      <Resource Include="Resources\lastik02.png">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="lines.png">
+      <Resource Include="Resources\lines.png">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="myImage.jpg" />
-      <Resource Include="pencil.png">
+      <Resource Include="Resources\pencil.png">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       </Resource>
-      <Resource Include="prer.png" />
-      <Resource Include="pryamaya.png" />
-      <Resource Include="rectangle.png" />
+      <Resource Include="Resources\prer.png" />
+      <Resource Include="Resources\pryamaya.png" />
+      <Resource Include="Resources\rectangle.png" />
+      <Resource Include="Resources\_.png" />
     </ItemGroup>
     <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
       <PackageReference Include="System.Drawing.Common">
@@ -81,5 +81,18 @@
       <PackageReference Include="System.Reactive.Windows.Forms">
         <Version>5.0.0</Version>
       </PackageReference>
+    </ItemGroup>
+    <ItemGroup>
+      <Compile Update="Properties\Resources.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Resources.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+    <ItemGroup>
+      <EmbeddedResource Update="Properties\Resources.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 </Project>
