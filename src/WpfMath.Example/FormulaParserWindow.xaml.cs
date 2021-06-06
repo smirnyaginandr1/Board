@@ -25,7 +25,6 @@ namespace MathBoard
 
 
         private List<String> funcStr = new List<String> { "lim", "sqrt", "bin", "/", "pow", "low", "int", "sum" };
-        private List<List<int>> table;
         private TexFormulaParser formulaParser = new TexFormulaParser();
 
         public Image imageCanvas;
@@ -40,14 +39,11 @@ namespace MathBoard
             ic.Children.Add(imageCanvas);
 
         }
-
-
         private void Button_MouseDown(object sender, MouseButtonEventArgs e)
         {
             saveFlag = false;
             this.Close();
         }
-
         private TexFormula? Parse_Formula(string input)
         {
             // Create formula object from input text.
@@ -63,7 +59,6 @@ namespace MathBoard
 
             return formula;
         }
-
         private void Parse_MouseDown(object sender, MouseButtonEventArgs e)
         {
             canvasString = InputTextBox.Text;
@@ -86,7 +81,6 @@ namespace MathBoard
             savePng = renderer.RenderToBitmap(0.0, 0.0);
             imageCanvas.Source = savePng;
         }
-
         private bool ParseFormula()
         {
             bool error = false;
@@ -177,7 +171,7 @@ namespace MathBoard
 
                             if (canvasString[position - 1] == ')')
                                 backArg = findBackArgs(position);
-                            else //"\\frac{arg1}{arg2}"
+                            else 
                                 backArg = canvasString[position - 1].ToString();
 
                             if (backArg == "" || backArg == null)
@@ -221,23 +215,6 @@ namespace MathBoard
                             canvasString = canvasString.Remove(position, str.Length + 1 + args[0].Length + 1);
                             canvasString = canvasString.Insert(position, "^{" + args[0] + "}");
                             break;
-                        //if (position + 1 >= canvasString.Length || position == 0)
-                        //{
-                        //    error = true;
-                        //    break;
-                        //}
-                        //if (canvasString[position + 1] == '(')
-                        //{
-                        //    args = findArgs(str, position, 1);
-                        //    if (args == null)
-                        //    {
-                        //        error = true;
-                        //        break;
-                        //    }
-                        //    canvasString = canvasString.Remove(position, str.Length + 1 + args[0].Length + 1);
-                        //    canvasString = canvasString.Insert(position, "^{" + args[0] + "}");
-                        //}
-                        //break;
 
                         case "low":
                             args = findArgs(str, position, 1);

@@ -5,9 +5,15 @@
     <Compile Update="FormulaParserWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="GraphParserWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="FormulaParserWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="GraphParserWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

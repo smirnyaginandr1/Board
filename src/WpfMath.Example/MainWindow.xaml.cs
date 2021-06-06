@@ -411,9 +411,12 @@ namespace WpfMath.Example
 
                     mousePoint1 = mousePoint;
 
-                    MathBoard.FormulaParserWindow parsG = new MathBoard.FormulaParserWindow(mousePoint);
+                    MathBoard.GraphParserWindow parsG = new MathBoard.GraphParserWindow(mousePoint);
                     parsG.Owner = this;
                     parsG.ShowDialog();
+                    if (parsG.closeFlag)
+                        return;
+                    parsG.closeFlag = true;
                     string formula = parsG.InputTextBox.Text;
 
                     List<Point> points = new List<Point>();
