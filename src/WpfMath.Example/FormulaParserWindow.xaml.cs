@@ -22,7 +22,7 @@ namespace MathBoard
     public partial class FormulaParserWindow : Window
     {
         private String canvasString = "";
-       
+
 
         private List<String> funcStr = new List<String> { "lim", "sqrt", "bin", "/", "pow", "low", "int", "sum" };
         private List<List<int>> table;
@@ -38,7 +38,7 @@ namespace MathBoard
             saveFlag = true;
             imageCanvas = new Image() { };
             ic.Children.Add(imageCanvas);
-            
+
         }
 
 
@@ -74,7 +74,6 @@ namespace MathBoard
                 return;
             }
 
-            createTable();
             if (ParseFormula())
             {
                 imageCanvas.Source = null;
@@ -88,64 +87,28 @@ namespace MathBoard
             imageCanvas.Source = savePng;
         }
 
-        private void createTable()
-        {
-            table = new List<List<int>>();
-            for (int i = 0; i < funcStr.Count; i++){
-                String copyStr = String.Copy(canvasString);
-                String str = funcStr[i];
-                table.Add(new List<int>());
-                int count = 0;
-                while (true)
-                {
-                    if (!copyStr.Contains(str))
-                        break;
-                    table[i].Add(copyStr.IndexOf(str) + (count * str.Length));
-                    count++;
-                    copyStr = copyStr.Remove(copyStr.IndexOf(str), str.Length);
-                }
-            }
-        }
-        private void reloadTable()
-        {
-            for (int i = 0; i < funcStr.Count; i++)
-            {
-                String copyStr = String.Copy(canvasString);
-                String str = funcStr[i];
-                int strCount = 0;
-                int count = 0;
-                while (true)
-                {
-                    if (!copyStr.Contains(str))
-                        break;
-                    table[i][strCount] = copyStr.IndexOf(str) + (count * str.Length);
-                    strCount++;
-                    count++;
-                    copyStr = copyStr.Remove(copyStr.IndexOf(str), str.Length);
-                }
-            }
-        }
         private bool ParseFormula()
         {
             bool error = false;
             int number = 0;
             foreach (var str in funcStr)
             {
-                for (int i = 0; i < table[number].Count; i++)
+                while (canvasString.Contains(str))
                 {
-                    int position = table[number][i];
+                    int i = 0;
+                    int position = canvasString.IndexOf(str);
                     String[] args;
                     switch (str)
                     {
                         case "lim":
-                            args = findArgs(str, table[number][i], 3);
+                            args = findArgs(str, position, 3);
                             if (args == null)
                             {
                                 error = true;
                                 break;
                             }
                             canvasString = canvasString.Remove(position, str.Length + 1 + args[0].Length + 3 + args[1].Length + args[2].Length);
-                            canvasString = canvasString.Insert(position, "\\lim_{" + args[0] + "\\to" + args[1] + "}" + "(" + args[2] + ")");
+                            canvasString = canvasString.Insert(position, "\\l_im_{" + args[0] + "\\to" + args[1] + "}" + "(" + args[2] + ")");
                             break;
 
                         case "sqrt":
@@ -156,7 +119,7 @@ namespace MathBoard
                                 break;
                             }
                             canvasString = canvasString.Remove(position, str.Length + 1 + args[0].Length + 1 + args[1].Length + 1);
-                            canvasString = canvasString.Insert(position, "\\sqrt[" + args[0] + "]{" + args[1] + "}");
+                            canvasString = canvasString.Insert(position, "\\sq_rt[" + args[0] + "]{" + args[1] + "}");
                             break;
 
                         case "bin":
@@ -167,7 +130,7 @@ namespace MathBoard
                                 break;
                             }
                             canvasString = canvasString.Remove(position, str.Length + 1 + args[0].Length + 1 + args[1].Length + 1);
-                            canvasString = canvasString.Insert(position, "\\binom{" + args[0] + "}{" + args[1] + "}");
+                            canvasString = canvasString.Insert(position, "\\bi_nom{" + args[0] + "}{" + args[1] + "}");
                             break;
 
                         case "int":
@@ -178,7 +141,7 @@ namespace MathBoard
                                 break;
                             }
                             canvasString = canvasString.Remove(position, str.Length + 1 + args[0].Length + 1 + args[1].Length + 1 + args[2].Length + 1);
-                            canvasString = canvasString.Insert(position, "\\int_{" + args[0] + "}^{" + args[1] + "}(" + args[2] + ")");
+                            canvasString = canvasString.Insert(position, "\\i_nt_{" + args[0] + "}^{" + args[1] + "}(" + args[2] + ")");
                             break;
 
                         case "sum":
@@ -189,7 +152,7 @@ namespace MathBoard
                                 break;
                             }
                             canvasString = canvasString.Remove(position, str.Length + 1 + args[0].Length + 1 + args[1].Length + 1 + args[2].Length + 1);
-                            canvasString = canvasString.Insert(position, "\\sum_{" + args[0] + "}^{" + args[1] + "} (" + args[2] + ")");
+                            canvasString = canvasString.Insert(position, "\\s_um_{" + args[0] + "}^{" + args[1] + "} (" + args[2] + ")");
                             break;
                         case "/":
                             if (position + 1 >= canvasString.Length || position == 0)
@@ -199,7 +162,7 @@ namespace MathBoard
                             }
                             if (canvasString[position + 1] == '(')
                             {
-                                args = findArgs(str, table[number][i], 1);
+                                args = findArgs(str, position, 1);
                                 if (args == null)
                                 {
                                     error = true;
@@ -293,14 +256,18 @@ namespace MathBoard
                     {
                         if (str == "/")
                             labelStatus.Content = "Ошибка в делении";
-                        else 
+                        else
                             labelStatus.Content = "Ошибка в " + str;
                         return true;
                     }
-                    reloadTable();
                 }
                 number++;
             }
+            canvasString = canvasString.Replace("s_um", "sum");
+            canvasString = canvasString.Replace("sq_rt", "sqrt");
+            canvasString = canvasString.Replace("bi_nom", "binom");
+            canvasString = canvasString.Replace("i_nt", "int");
+            canvasString = canvasString.Replace("l_im", "lim");
             return false;
         }
         private String[] findArgs(String func, int position, int argsQuantity)
@@ -313,8 +280,7 @@ namespace MathBoard
                 return null;
             char a;
             if (canvasString[position + func.Length] != '(')
-                a = canvasString[26];
-                //return null;
+                return null;
 
             int countArg = 0, bracketCount = 0;
             for (int i = position + func.Length + 1; i < canvasString.Length; i++)
@@ -333,8 +299,8 @@ namespace MathBoard
                     bracketCount--;
                 args[countArg] += canvasString[i];
             }
-            foreach(var arg in args)
-                if(arg == "")
+            foreach (var arg in args)
+                if (arg == "")
                     return null;
             return args;
         }
@@ -342,7 +308,7 @@ namespace MathBoard
         private String findBackArgs(int position)
         {
             String finalStr = "";
-            
+
             int bracketCount = 0;
             for (int i = position - 2; i >= 0; i--)
             {
