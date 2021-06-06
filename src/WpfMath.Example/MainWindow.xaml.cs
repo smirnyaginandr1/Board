@@ -12,7 +12,7 @@ using Microsoft.Win32;
 using System.Windows.Media;
 using System.Windows.Forms;
 
-//Тут содержатся фигуры для рисования
+//Г’ГіГІ Г±Г®Г¤ГҐГ°Г¦Г ГІГ±Гї ГґГЁГЈГіГ°Г» Г¤Г«Гї Г°ГЁГ±Г®ГўГ Г­ГЁГї
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using MathBoard;
@@ -23,7 +23,7 @@ namespace WpfMath.Example
     {
         /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         * 
-        *                                              Объявление полей
+        *                                              ГЋГЎГєГїГўГ«ГҐГ­ГЁГҐ ГЇГ®Г«ГҐГ©
         * 
         * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         */
@@ -45,22 +45,23 @@ namespace WpfMath.Example
 
         private double stroke = 0;
         private State stateCursor = State.Pen;
-        private enum State
-        {
-            Ellipse,
-            Rectangle,
-            Line,
-            CurvedLine,
-            Pen,
-            Eraser,
-            Graph,
-            PolarGraph,
-            None,
-            Formula
+
+        private enum State{ 
+          Ellipse,
+          Rectangle,
+          Line,
+          CurvedLine,
+          Pen,
+          Eraser,
+          Image,
+          Graph,
+          PolarGraph,
+          None,
+          Formula
         };
 
         /*
-         * Конструктор
+         * ГЉГ®Г­Г±ГІГ°ГіГЄГІГ®Г°
          */
         public MainWindow()
         {
@@ -68,7 +69,7 @@ namespace WpfMath.Example
         }
         /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         * 
-        *                                              Методы работы с формулами
+        *                                              ГЊГҐГІГ®Г¤Г» Г°Г ГЎГ®ГІГ» Г± ГґГ®Г°Г¬ГіГ«Г Г¬ГЁ
         * 
         * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         */
@@ -140,7 +141,7 @@ namespace WpfMath.Example
             double horizontalMiddle = dimensions.X / 2;
             double verticalMiddle = dimensions.Y / 2;
 
-            //Размер графика
+            //ГђГ Г§Г¬ГҐГ° ГЈГ°Г ГґГЁГЄГ 
             double width = 400;
             double height = 400;
 
@@ -167,21 +168,21 @@ namespace WpfMath.Example
 
         /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         * 
-        *                                              Запуск и закрытие окна
+        *                                              Г‡Г ГЇГіГ±ГЄ ГЁ Г§Г ГЄГ°Г»ГІГЁГҐ Г®ГЄГ­Г 
         * 
         * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         */
         //TODO: add save box
         private void Window_Closed(object sender, EventArgs e)
         {
-            /*  Закрытие и открытие листа на одном месте
+            /*  Г‡Г ГЄГ°Г»ГІГЁГҐ ГЁ Г®ГІГЄГ°Г»ГІГЁГҐ Г«ГЁГ±ГІГ  Г­Г  Г®Г¤Г­Г®Г¬ Г¬ГҐГ±ГІГҐ
             Properties.Settings ps = Properties.Settings.Default;
             ps.Top = this.Top;
             ps.Left = this.Left;
             ps.Save();*/
         }
 
-        //Загрузка окна
+        //Г‡Г ГЈГ°ГіГ§ГЄГ  Г®ГЄГ­Г 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var mySliderSize = (Slider)this.FindName("sizeSlider");
@@ -196,7 +197,7 @@ namespace WpfMath.Example
 
         /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         * 
-        *                  Осталось от предыдущих разрабов, не разбирался. Как понял - это боксы ввода формул
+        *                  ГЋГ±ГІГ Г«Г®Г±Гј Г®ГІ ГЇГ°ГҐГ¤Г»Г¤ГіГ№ГЁГµ Г°Г Г§Г°Г ГЎГ®Гў, Г­ГҐ Г°Г Г§ГЎГЁГ°Г Г«Г±Гї. ГЉГ ГЄ ГЇГ®Г­ГїГ« - ГЅГІГ® ГЎГ®ГЄГ±Г» ГўГўГ®Г¤Г  ГґГ®Г°Г¬ГіГ«
         * 
         * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         */
@@ -211,13 +212,13 @@ namespace WpfMath.Example
 
         /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
          * 
-         *                                              Обработка нажатий на кнопки
+         *                                              ГЋГЎГ°Г ГЎГ®ГІГЄГ  Г­Г Г¦Г ГІГЁГ© Г­Г  ГЄГ­Г®ГЇГЄГЁ
          * 
          * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
          */
 
         /*
-         * Клик на ластик
+         * ГЉГ«ГЁГЄ Г­Г  Г«Г Г±ГІГЁГЄ
          */
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -225,7 +226,7 @@ namespace WpfMath.Example
         }
 
         /*
-         * Клик на карандаш
+         * ГЉГ«ГЁГЄ Г­Г  ГЄГ Г°Г Г­Г¤Г Гё
          */
         private void pen_Click(object sender, RoutedEventArgs e)
         {
@@ -233,7 +234,7 @@ namespace WpfMath.Example
         }
 
         /*
-         * Клик на выбор цвета
+         * ГЉГ«ГЁГЄ Г­Г  ГўГ»ГЎГ®Г° Г¶ГўГҐГІГ 
          */
         private void Color_Click(object sender, RoutedEventArgs e)
         {
@@ -248,7 +249,7 @@ namespace WpfMath.Example
         }
 
         /*
-         * Клик на очистку графиков
+         * ГЉГ«ГЁГЄ Г­Г  Г®Г·ГЁГ±ГІГЄГі ГЈГ°Г ГґГЁГЄГ®Гў
          */
         private void del_Click(object sender, RoutedEventArgs e)
         {
@@ -257,7 +258,7 @@ namespace WpfMath.Example
         }
 
         /*
-         * Клик на File
+         * ГЉГ«ГЁГЄ Г­Г  File
          */
         private void ContexMenuFile_Click(object sender, RoutedEventArgs e)
         {
@@ -269,7 +270,7 @@ namespace WpfMath.Example
         }
 
         /*
-         * Клик на Info
+         * ГЉГ«ГЁГЄ Г­Г  Info
          */
         private void ContexMenuInfo_Click(object sender, RoutedEventArgs e)
         {
@@ -281,7 +282,7 @@ namespace WpfMath.Example
         }
 
         /*
-         * Клик на Help
+         * ГЉГ«ГЁГЄ Г­Г  Help
          */
         private void ContexMenuHelp_Click(object sender, RoutedEventArgs e)
         {
@@ -293,7 +294,7 @@ namespace WpfMath.Example
         }
 
         /*
-         * Клик на формулу
+         * ГЉГ«ГЁГЄ Г­Г  ГґГ®Г°Г¬ГіГ«Гі
          */
 
         private void formula_Click(object sender, RoutedEventArgs e)
@@ -303,7 +304,7 @@ namespace WpfMath.Example
         }
 
         /*
-         * Изменение слайдера с размером курсора
+         * Г€Г§Г¬ГҐГ­ГҐГ­ГЁГҐ Г±Г«Г Г©Г¤ГҐГ°Г  Г± Г°Г Г§Г¬ГҐГ°Г®Г¬ ГЄГіГ°Г±Г®Г°Г 
          */
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
@@ -314,42 +315,42 @@ namespace WpfMath.Example
         }
 
         /*
-         * Нажатие на прямоугольник
+         * ГЌГ Г¦Г ГІГЁГҐ Г­Г  ГЇГ°ГїГ¬Г®ГіГЈГ®Г«ГјГ­ГЁГЄ
          */
         private void rectangle_Click(object sender, RoutedEventArgs e)
         {
             setStateCursor(State.Rectangle);
         }
         /*
-         * Нажатие на полярный график
+         * ГЌГ Г¦Г ГІГЁГҐ Г­Г  ГЇГ®Г«ГїГ°Г­Г»Г© ГЈГ°Г ГґГЁГЄ
          */
         private void polar_graph_Click(object sender, RoutedEventArgs e)
         {
             setStateCursor(State.PolarGraph);
         }
         /*
-         * Нажатие на линию
+         * ГЌГ Г¦Г ГІГЁГҐ Г­Г  Г«ГЁГ­ГЁГѕ
          */
         private void line_Click(object sender, RoutedEventArgs e)
         {
             setStateCursor(State.Line);
         }
         /*
-         * Нажатие на эллипс
+         * ГЌГ Г¦Г ГІГЁГҐ Г­Г  ГЅГ«Г«ГЁГЇГ±
          */
         private void circle_Click(object sender, RoutedEventArgs e)
         {
             setStateCursor(State.Ellipse);
         }
         /*
-         * Нажатие на график
+         * ГЌГ Г¦Г ГІГЁГҐ Г­Г  ГЈГ°Г ГґГЁГЄ
          */
         private void dec_graph_Click(object sender, RoutedEventArgs e)
         {
             setStateCursor(State.Graph);
         }
         /*
-         * Нажатие на кривую линию
+         * ГЌГ Г¦Г ГІГЁГҐ Г­Г  ГЄГ°ГЁГўГіГѕ Г«ГЁГ­ГЁГѕ
          */
         private void curved_line_Click(object sender, RoutedEventArgs e)
         {
@@ -359,13 +360,13 @@ namespace WpfMath.Example
 
         /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
          * 
-         *                                              Обработка нажатий на канвас
+         *                                              ГЋГЎГ°Г ГЎГ®ГІГЄГ  Г­Г Г¦Г ГІГЁГ© Г­Г  ГЄГ Г­ГўГ Г±
          * 
          * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
          */
 
         /*
-         * Нажатие ЛКМ на канвас
+         * ГЌГ Г¦Г ГІГЁГҐ Г‹ГЉГЊ Г­Г  ГЄГ Г­ГўГ Г±
          */
         private void ic_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -441,27 +442,41 @@ namespace WpfMath.Example
                     break;
 
                 case State.Formula:
-                    MathBoard.FormulaParserWindow pars = new MathBoard.FormulaParserWindow(mousePoint);
+                    MathBoard.FormulaParserWindow pars = new MathBoard.FormulaParserWindow();
                     pars.Owner = this;
                     pars.ShowDialog();
 
-                    if (pars.savePng == null)
+                    if (pars.imageCanvas.Source == null)
+                    {
+                        setStateCursor(State.None);
                         return;
+                    }
+
+                    if (pars.saveFlag)
+                    {
+                        setStateCursor(State.None);
+                        pars.imageCanvas = null;
+                        pars.saveFlag = false;
+                        return;
+
+                    }
                     Image image = new Image()
                     {
                         Source = pars.savePng,
                         Margin = new Thickness(mousePoint.X, mousePoint.Y - 25, 100, 100)
                     };
                     ic.Children.Add(image);
-                    pars.savePng = null;
                     setStateCursor(State.None);
+                    break;
+                case State.Image:
+
                     break;
             }
             isPaint = true;
         }
 
         /*
-         * Поднятие ЛКМ с канваса
+         * ГЏГ®Г¤Г­ГїГІГЁГҐ Г‹ГЉГЊ Г± ГЄГ Г­ГўГ Г±Г 
          */
         private void ic_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -495,7 +510,7 @@ namespace WpfMath.Example
         }
 
         /*
-         * Ведение зажатой ЛКМ по канвасу
+         * Г‚ГҐГ¤ГҐГ­ГЁГҐ Г§Г Г¦Г ГІГ®Г© Г‹ГЉГЊ ГЇГ® ГЄГ Г­ГўГ Г±Гі
          */
         private void ic_PreviewMouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
@@ -506,7 +521,7 @@ namespace WpfMath.Example
                 case State.Ellipse:
                     double widthEllipse = pointMouse.X - figureStart.X;
                     double heightEllipse = pointMouse.Y - figureStart.Y;
-                    //TODO: при большом размере курсора недорисовывает маленький эллипс (обрезает)
+                    //TODO: ГЇГ°ГЁ ГЎГ®Г«ГјГёГ®Г¬ Г°Г Г§Г¬ГҐГ°ГҐ ГЄГіГ°Г±Г®Г°Г  Г­ГҐГ¤Г®Г°ГЁГ±Г®ГўГ»ГўГ ГҐГІ Г¬Г Г«ГҐГ­ГјГЄГЁГ© ГЅГ«Г«ГЁГЇГ± (Г®ГЎГ°ГҐГ§Г ГҐГІ)
 
                     if (widthEllipse >= 0 && heightEllipse >= 0)
                     {
@@ -572,13 +587,13 @@ namespace WpfMath.Example
 
         /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
          * 
-         *                                              Геттеры и сеттеры класса
+         *                                              ГѓГҐГІГІГҐГ°Г» ГЁ Г±ГҐГІГІГҐГ°Г» ГЄГ«Г Г±Г±Г 
          * 
          * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
          */
 
         /*
-         * Сеттер выбранного цвета
+         * Г‘ГҐГІГІГҐГ° ГўГ»ГЎГ°Г Г­Г­Г®ГЈГ® Г¶ГўГҐГІГ 
          */
         private void setAllColor(Color color)
         {
@@ -586,7 +601,7 @@ namespace WpfMath.Example
         }
 
         /*
-         * Геттер выбранного цвета
+         * ГѓГҐГІГІГҐГ° ГўГ»ГЎГ°Г Г­Г­Г®ГЈГ® Г¶ГўГҐГІГ 
          */
         public Color getAllColor()
         {
@@ -594,7 +609,7 @@ namespace WpfMath.Example
         }
 
         /*
-        * Установка состояния курсора (что рисовать). Состояния в enum State
+        * Г“Г±ГІГ Г­Г®ГўГЄГ  Г±Г®Г±ГІГ®ГїГ­ГЁГї ГЄГіГ°Г±Г®Г°Г  (Г·ГІГ® Г°ГЁГ±Г®ГўГ ГІГј). Г‘Г®Г±ГІГ®ГїГ­ГЁГї Гў enum State
         */
         private void setStateCursor(State state)
         {
@@ -602,7 +617,7 @@ namespace WpfMath.Example
         }
 
         /*
-         * Сеттер на установку размера курсора
+         * Г‘ГҐГІГІГҐГ° Г­Г  ГіГ±ГІГ Г­Г®ГўГЄГі Г°Г Г§Г¬ГҐГ°Г  ГЄГіГ°Г±Г®Г°Г 
          */
         private void setStroke(double value)
         {
@@ -611,7 +626,7 @@ namespace WpfMath.Example
 
 
         /*
-         * Геттер размера курсора
+         * ГѓГҐГІГІГҐГ° Г°Г Г§Г¬ГҐГ°Г  ГЄГіГ°Г±Г®Г°Г 
          */
         public double getStroke()
         {
