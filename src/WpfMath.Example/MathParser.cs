@@ -183,6 +183,10 @@ namespace MathBoard
             while (m.Success)
             {
                 Expression = regEx.Replace(Expression, Math.Pow(Convert.ToDouble(m.Groups[1].Value), Convert.ToDouble(m.Groups[2].Value)).ToString(), 1);
+                if (Convert.ToInt32(m.Groups[2].Value) % 2 == 0 && Expression[0] == '-')
+                {
+                    Expression = Expression.Substring(1);
+                }
                 m = regEx.Match(Expression);
             }
             regEx = new Regex(@"([\+-]?\d+,*\d*[eE][\+-]?\d+|[\-\+]?\d+,*\d*)([\/\*])(-?\d+,*\d*[eE][\+-]?\d+|-?\d+,*\d*)");

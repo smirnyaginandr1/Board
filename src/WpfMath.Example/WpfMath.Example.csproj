@@ -16,13 +16,16 @@
       <None Remove="Resources\formula.png" />
       <None Remove="Resources\gradient.png" />
       <None Remove="Resources\graph.png" />
+      <None Remove="Resources\image.png" />
       <None Remove="Resources\Krivaya.png" />
+      <None Remove="Resources\lastik.png" />
       <None Remove="Resources\lastik02.png" />
       <None Remove="Resources\lines.png" />
       <None Remove="Resources\pencil.png" />
       <None Remove="Resources\prer.png" />
       <None Remove="Resources\pryamaya.png" />
       <None Remove="Resources\rectangle.png" />
+      <None Remove="Resources\text.png" />
       <None Remove="Resources\_.png" />
     </ItemGroup>
     <ItemGroup>
@@ -59,10 +62,9 @@
       <Resource Include="Resources\graph.png">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       </Resource>
+      <Resource Include="Resources\image.png" />
       <Resource Include="Resources\Krivaya.png" />
-      <Resource Include="Resources\lastik02.png">
-        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      </Resource>
+      <Resource Include="Resources\lastik.png" />
       <Resource Include="Resources\lines.png">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       </Resource>
@@ -72,6 +74,7 @@
       <Resource Include="Resources\prer.png" />
       <Resource Include="Resources\pryamaya.png" />
       <Resource Include="Resources\rectangle.png" />
+      <Resource Include="Resources\text.png" />
       <Resource Include="Resources\_.png" />
     </ItemGroup>
     <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">

@@ -11,6 +11,8 @@ using System.Windows.Forms;
 //Òóò ñîäåðæàòñÿ ôèãóðû äëÿ ðèñîâàíèÿ
 using System.Windows.Shapes;
 using MathBoard;
+using System.IO;
+using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
 namespace WpfMath.Example
 {
@@ -722,6 +724,29 @@ namespace WpfMath.Example
                 ell.StrokeDashArray = dashes;
             }
             return ell;
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog()
+            {
+                Filter = "SVG Files (*.svg)|*.svg|PNG Files (*.png)|*.png"
+            };
+            var result = saveFileDialog.ShowDialog();
+            if (result == false) return;
+
+            string sigPath = System.IO.Path.GetTempFileName();
+
+            MemoryStream ms = new MemoryStream();
+            FileStream fs = new FileStream("D:\\Proekt\\rest.jpg", FileMode.Create);
+
+            RenderTargetBitmap rtb = new RenderTargetBitmap(700, 300, 96d, 96d, PixelFormats.Default);
+            rtb.Render(ic);
+            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(rtb));
+
+            encoder.Save(fs);
+            fs.Close();
         }
     }
 }

@@ -64,7 +64,7 @@
 
 
                 <Button x:Name="lastic" MouseDown="imgTL_MouseDown" Background="{x:Null}" Click="Button_Click" Height="37" Width="37" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible"  Grid.Column="0">
-                    <Image Source="/Resources/lastik02.png" Visibility="Visible" Width="auto" Height="auto" HorizontalAlignment="Left" VerticalAlignment="Center"></Image>
+                    <Image Source="/Resources/lastik.png" Visibility="Visible" Width="auto" Height="auto" HorizontalAlignment="Left" VerticalAlignment="Center"></Image>
                 </Button>
 
                 <Button x:Name="circle" Click="circle_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="1" >
@@ -76,7 +76,7 @@
                 </Button>
 
                 <Button x:Name="image" Click="image_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="3" >
-                    
+                    <Image Source="/Resources/image.png"></Image>
                 </Button>
 
             </Grid>
@@ -112,7 +112,7 @@
                 </MenuItem.Icon>
                 <MenuItem.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Сохранить файл"/>
+                        <MenuItem Header="Сохранить файл" Click="Save_Click" x:Name="Save"/>
                         <MenuItem Header="Загрузить файл"/>
                         <MenuItem Header="Настройки"/>
                     </ContextMenu>

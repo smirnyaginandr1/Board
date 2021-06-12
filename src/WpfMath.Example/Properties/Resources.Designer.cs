@@ -123,16 +123,6 @@ namespace MathBoard.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap lastik02 {
-            get {
-                object obj = ResourceManager.GetObject("lastik02", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap lines {
             get {
                 object obj = ResourceManager.GetObject("lines", resourceCulture);
