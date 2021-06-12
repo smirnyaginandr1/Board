@@ -51,6 +51,7 @@ namespace WpfMath.Example
           Pen,
           Eraser,
           Image,
+          Text,
           Graph,
           PolarGraph,
           None,
@@ -486,6 +487,10 @@ namespace WpfMath.Example
                     ic.Children.Add(image);
                     setStateCursor(State.None);
                     break;
+
+                case State.Text:
+                    break;
+
                 case State.Image:
                     OpenFileDialog myOpenFileDialog = new OpenFileDialog();
                     myOpenFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
@@ -740,7 +745,7 @@ namespace WpfMath.Example
             MemoryStream ms = new MemoryStream();
             FileStream fs = new FileStream("D:\\Proekt\\rest.jpg", FileMode.Create);
 
-            RenderTargetBitmap rtb = new RenderTargetBitmap(700, 300, 96d, 96d, PixelFormats.Default);
+            RenderTargetBitmap rtb = new RenderTargetBitmap((int)ic.ActualWidth, (int)ic.ActualHeight, 96d, 96d, PixelFormats.Default);
             rtb.Render(ic);
             JpegBitmapEncoder encoder = new JpegBitmapEncoder();
             encoder.Frames.Add(BitmapFrame.Create(rtb));

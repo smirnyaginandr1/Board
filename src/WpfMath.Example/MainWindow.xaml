@@ -145,7 +145,7 @@
         </Grid>
 
         <ScrollViewer x:Name="sv1" Grid.Column="0" Grid.Row="1" VerticalScrollBarVisibility="Hidden">
-            <InkCanvas x:Name="ic" Height="auto" Cursor="Pen" PreviewMouseLeftButtonDown="ic_MouseLeftButtonDown" PreviewMouseLeftButtonUp="ic_PreviewMouseLeftButtonUp" PreviewMouseMove="ic_PreviewMouseMove">
+            <InkCanvas x:Name="ic" Height="auto" Width="auto" Cursor="Pen" PreviewMouseLeftButtonDown="ic_MouseLeftButtonDown" PreviewMouseLeftButtonUp="ic_PreviewMouseLeftButtonUp" PreviewMouseMove="ic_PreviewMouseMove">
             </InkCanvas>
         </ScrollViewer>
     </Grid>
