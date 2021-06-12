@@ -1,20 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using System.Windows.Input;
 using System.Windows;
-using System.Windows.Ink;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-using Microsoft.Win32;
 
 using System.Windows.Media;
 using System.Windows.Forms;
 
 //Òóò ñîäåðæàòñÿ ôèãóðû äëÿ ðèñîâàíèÿ
 using System.Windows.Shapes;
-using System.Collections.ObjectModel;
 using MathBoard;
 
 namespace WpfMath.Example
@@ -59,6 +53,8 @@ namespace WpfMath.Example
           None,
           Formula
         };
+
+        private bool dash = false;
 
         /*
          * Êîíñòðóêòîð
@@ -190,6 +186,7 @@ namespace WpfMath.Example
             setStroke(mySliderSize.Value);
             setAllColor(Color.FromRgb(0, 0, 0));
             ic.EditingMode = InkCanvasEditingMode.None;
+            label_state.Content = "Карандаш";
             /*Properties.Settings ps = Properties.Settings.Default;
             this.Top = ps.Top;
             this.Left = ps.Left;*/
@@ -223,6 +220,7 @@ namespace WpfMath.Example
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             setStateCursor(State.Eraser);
+            label_state.Content = "Резинка";
         }
 
         /*
@@ -231,6 +229,7 @@ namespace WpfMath.Example
         private void pen_Click(object sender, RoutedEventArgs e)
         {
             setStateCursor(State.Pen);
+            label_state.Content = "Карандаш";
         }
 
         /*
@@ -300,6 +299,7 @@ namespace WpfMath.Example
         private void formula_Click(object sender, RoutedEventArgs e)
         {
             setStateCursor(State.Formula);
+            label_state.Content = "Выберите место для формулы";
             //TODO: add formula box
         }
 
@@ -320,13 +320,7 @@ namespace WpfMath.Example
         private void rectangle_Click(object sender, RoutedEventArgs e)
         {
             setStateCursor(State.Rectangle);
-        }
-        /*
-         * Íàæàòèå íà ïîëÿðíûé ãðàôèê
-         */
-        private void polar_graph_Click(object sender, RoutedEventArgs e)
-        {
-            setStateCursor(State.PolarGraph);
+            label_state.Content = "Прямоугольник";
         }
         /*
          * Íàæàòèå íà ëèíèþ
@@ -334,6 +328,7 @@ namespace WpfMath.Example
         private void line_Click(object sender, RoutedEventArgs e)
         {
             setStateCursor(State.Line);
+            label_state.Content = "Прямая";
         }
         /*
          * Íàæàòèå íà ýëëèïñ
@@ -341,6 +336,7 @@ namespace WpfMath.Example
         private void circle_Click(object sender, RoutedEventArgs e)
         {
             setStateCursor(State.Ellipse);
+            label_state.Content = "Эллипс";
         }
         /*
          * Íàæàòèå íà ãðàôèê
@@ -348,6 +344,7 @@ namespace WpfMath.Example
         private void dec_graph_Click(object sender, RoutedEventArgs e)
         {
             setStateCursor(State.Graph);
+            label_state.Content = "Выберите место для графика";
         }
         /*
          * Íàæàòèå íà êðèâóþ ëèíèþ
@@ -355,6 +352,16 @@ namespace WpfMath.Example
         private void curved_line_Click(object sender, RoutedEventArgs e)
         {
             setStateCursor(State.CurvedLine);
+        }
+
+        private void checkBox_Checked(object sender, RoutedEventArgs e)
+        {
+            dash = true;
+        }
+
+        private void checkBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            dash = false;
         }
 
 
@@ -424,11 +431,11 @@ namespace WpfMath.Example
                     MathExpression = formula;
                     for (double i = START_X; i <= END_X; i += STEP)
                     {
-                        string temp = MathExpression.Replace("x", i.ToString());
-                        if (!mp.Evaluate(temp))
-                        {
-                        }
-                        else
+                        string temp = "";
+                        temp = MathExpression.Replace("exp", "e_p");
+                        temp = temp.Replace("x", i.ToString());
+                        temp = temp.Replace("e_p", "exp");
+                        if (mp.Evaluate(temp))
                         {
                             if ((mp.Result < 10 && mp.Result > -10) && (i < 10 && i > -10))
                             {
@@ -638,41 +645,63 @@ namespace WpfMath.Example
 
         private Line getNewLine(Point pointOne, Point pointTwo, Color color)
         {
-            return new Line
+            
+            Line line = new Line();
+
+            line.X1 = pointOne.X;
+            line.Y1 = pointOne.Y - 25;
+            line.X2 = pointTwo.X;
+            line.Y2 = pointTwo.Y - 25;
+            line.StrokeStartLineCap = PenLineCap.Round;
+            line.StrokeEndLineCap = PenLineCap.Round;
+            line.Stroke = new SolidColorBrush(color);
+            line.StrokeThickness = getStroke();
+            if (dash)
             {
-                X1 = pointOne.X,
-                Y1 = pointOne.Y - 25,
-                X2 = pointTwo.X,
-                Y2 = pointTwo.Y - 25,
-                StrokeStartLineCap = PenLineCap.Round,
-                StrokeEndLineCap = PenLineCap.Round,
-                Stroke = new SolidColorBrush(color),
-                StrokeThickness = getStroke()
-            };
+                DoubleCollection dashes = new DoubleCollection();
+                dashes.Add(2);
+                dashes.Add(2);
+                line.StrokeDashArray = dashes;
+            }
+            return line;
         }
         private Rectangle getNewRectangle(Point pointOne, Point pointTwo, Color color)
         {
-            return new Rectangle
-            {
-                Stroke = new SolidColorBrush(getAllColor()),
-                Height = 0,
-                Width = 0,
-                Margin = new Thickness(pointOne.X, pointOne.Y - 25, pointTwo.X, pointTwo.Y - 25),
-                StrokeThickness = getStroke()
+            Rectangle rectan = new Rectangle();
 
-            };
+
+            rectan.Stroke = new SolidColorBrush(getAllColor());
+            rectan.Height = 0;
+            rectan.Width = 0;
+            rectan.Margin = new Thickness(pointOne.X, pointOne.Y - 25, pointTwo.X, pointTwo.Y - 25);
+            rectan.StrokeThickness = getStroke();
+            if (dash)
+            {
+                DoubleCollection dashes = new DoubleCollection();
+                dashes.Add(2);
+                dashes.Add(2);
+                rectan.StrokeDashArray = dashes;
+            }
+            return rectan;
         }
 
         private Ellipse getNewEllpse(Point pointOne, Point pointTwo, Color color)
         {
-            return new Ellipse
+            Ellipse ell = new Ellipse();
+
+            ell.Stroke = new SolidColorBrush(color);
+            ell.Height = 0;
+            ell.Width = 0;
+            ell.Margin = new Thickness(pointOne.X, pointOne.Y - 25, pointTwo.X, pointTwo.Y - 25);
+            ell.StrokeThickness = getStroke();
+            if (dash)
             {
-                Stroke = new SolidColorBrush(color),
-                Height = 0,
-                Width = 0,
-                Margin = new Thickness(pointOne.X, pointOne.Y - 25, pointTwo.X, pointTwo.Y - 25),
-                StrokeThickness = getStroke()
-            };
+                DoubleCollection dashes = new DoubleCollection();
+                dashes.Add(2);
+                dashes.Add(2);
+                ell.StrokeDashArray = dashes;
+            }
+            return ell;
         }
     }
 }

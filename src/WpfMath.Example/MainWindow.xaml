@@ -9,7 +9,7 @@
     </Window.Resources>
     <Grid>
 
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -45,12 +45,11 @@
                 <Button x:Name="formula" Click="formula_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Grid.Column="2" >
                     <Image Source="/Resources/formula.png"></Image>
                 </Button>
-                <Button x:Name="polar_graph" Click="polar_graph_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Grid.Column="3" >
-                    <Image Source="/Resources/graph.png"></Image>
+
+                <Button x:Name="pr_line" Click="line_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Grid.Column="3" >
+                    <Image Source="/Resources/pryamaya.png"></Image>
                 </Button>
-                <Button x:Name="curved_line" Click="curved_line_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Grid.Column="4" >
-                    <Image Source="/Resources/Krivaya.png"></Image>
-                </Button>
+
             </Grid>
             <Grid Grid.Column="0" Margin="0,40,165,0">
                 <Grid.ColumnDefinitions>
@@ -72,14 +71,9 @@
                     <Image Source="/Resources/circle.png"></Image>
                 </Button>
 
-                <Button x:Name="dec_graph" Click="dec_graph_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="3" >
+                <Button x:Name="dec_graph" Click="dec_graph_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="2" >
                     <Image Source="/Resources/graph.png"></Image>
                 </Button>
-
-                <Button x:Name="pr_line" Click="line_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="4" >
-                    <Image Source="/Resources/pryamaya.png"></Image>
-                </Button>
-
             </Grid>
             <Button x:Name="del" Click="del_Click" Height="30" Width="90" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Grid.Column="1" Margin="0,45,0,0" >
                 Очистить лист
@@ -93,6 +87,9 @@
                     <TextBox HorizontalAlignment="Center" FontSize="10" Text="Толщина линии" VerticalAlignment="Top" Background="LightYellow" Width="94" BorderBrush="LightYellow" Grid.Column="1"/>
                 </StackPanel>
             </Border>
+            <Label x:Name="label_state" Content="" HorizontalAlignment="Left" Margin="321,60,0,0" VerticalAlignment="Top" Height="25" Width="312"/>
+
+            <CheckBox x:Name="check" Content="Пунктир" Checked="checkBox_Checked" Unchecked="checkBox_Unchecked" HorizontalAlignment="Left" Margin="540,10,0,0" VerticalAlignment="Top"/>
 
         </Grid>
         <Grid>
