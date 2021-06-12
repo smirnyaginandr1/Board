@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Forms;
 
 //Òóò ñîäåðæàòñÿ ôèãóðû äëÿ ðèñîâàíèÿ
@@ -364,6 +365,11 @@ namespace WpfMath.Example
             dash = false;
         }
 
+        private void image_Click(object sender, RoutedEventArgs e)
+        {
+            setStateCursor(State.Image);
+            label_state.Content = "Выберите место для картинки";
+        }
 
         /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
          * 
@@ -479,7 +485,21 @@ namespace WpfMath.Example
                     setStateCursor(State.None);
                     break;
                 case State.Image:
+                    OpenFileDialog myOpenFileDialog = new OpenFileDialog();
+                    myOpenFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
 
+                    if (myOpenFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
+                        BitmapImage imageToCanvas = new BitmapImage(new Uri(myOpenFileDialog.FileName, UriKind.Absolute));
+                        Image imageControl = new Image()
+                        {
+                            Source = imageToCanvas,
+                            Margin = new Thickness(mousePoint.X, mousePoint.Y - 80, 0, 0),
+                            Width = 200,
+                            Height = 200
+                        };
+                        ic.Children.Add(imageControl);
+                    }
                     break;
             }
             isPaint = true;

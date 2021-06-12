@@ -74,6 +74,11 @@
                 <Button x:Name="dec_graph" Click="dec_graph_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="2" >
                     <Image Source="/Resources/graph.png"></Image>
                 </Button>
+
+                <Button x:Name="image" Click="image_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="3" >
+                    
+                </Button>
+
             </Grid>
             <Button x:Name="del" Click="del_Click" Height="30" Width="90" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Grid.Column="1" Margin="0,45,0,0" >
                 Очистить лист
