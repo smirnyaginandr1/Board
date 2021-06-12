@@ -95,6 +95,7 @@
             <Label x:Name="label_state" Content="" HorizontalAlignment="Left" Margin="321,60,0,0" VerticalAlignment="Top" Height="25" Width="312"/>
 
             <CheckBox x:Name="check" Content="Пунктир" Checked="checkBox_Checked" Unchecked="checkBox_Unchecked" HorizontalAlignment="Left" Margin="540,10,0,0" VerticalAlignment="Top"/>
+            <Button Content="Button" HorizontalAlignment="Left" Margin="335,22,0,0" VerticalAlignment="Top" Height="38" Width="56" Click="Button_Click_1"/>
 
         </Grid>
         <Grid>

@@ -489,6 +489,9 @@ namespace WpfMath.Example
                     break;
 
                 case State.Text:
+                    TextBlock TB = new TextBlock();
+                    TB.Text = "Successfull";
+                    ic.Children.Add(TB);
                     break;
 
                 case State.Image:
@@ -752,6 +755,11 @@ namespace WpfMath.Example
 
             encoder.Save(fs);
             fs.Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            setStateCursor(State.Text);
         }
     }
 }
