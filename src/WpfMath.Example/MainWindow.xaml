@@ -8,8 +8,6 @@
     <Window.Resources>
     </Window.Resources>
     <Grid>
-
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -18,84 +16,79 @@
             <RowDefinition Height="580*" />
             <RowDefinition Height="80*"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="grdSelect" Grid.Column="0" Grid.Row="2" Background="LightYellow" Height="85" VerticalAlignment="Center">
+        <Grid x:Name="grdSelect" Grid.Column="0" Grid.Row="2" Background="LightYellow" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="5*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="210*"/>
+                <ColumnDefinition Width="47*"/>
+                <ColumnDefinition Width="43*"/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0" Margin="0,3,165,0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Column="0" Grid.RowSpan="2" Margin="0,0,0,0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40*"/>
-                    <ColumnDefinition Width="40*"/>
-                    <ColumnDefinition Width="40*"/>
-                    <ColumnDefinition Width="40*"/>
-                    <ColumnDefinition Width="40*"/>
-                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="65*"/>
 
                 </Grid.ColumnDefinitions>
-                <Button x:Name="pen" Click="pen_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button x:Name="pen" Click="pen_Click" ToolTip="Карандаш" Height="37" Width="37" BorderThickness="0" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Grid.Column="0">
                     <Image Source="/Resources/pencil.png"></Image>
                 </Button>
 
-                <Button x:Name="rectangle_but" Click="rectangle_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Grid.Column="1" >
+                <Button x:Name="rectangle_but" Click="rectangle_Click" ToolTip="Прямоугольник" BorderThickness="0" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Grid.Column="1" >
                     <Image Source="/Resources/rectangle.png"></Image>
                 </Button>
 
-                <Button x:Name="formula" Click="formula_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Grid.Column="2" >
+                <Button x:Name="formula" Click="formula_Click" BorderThickness="0" ToolTip="Формула" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Grid.Column="2" >
                     <Image Source="/Resources/formula.png"></Image>
                 </Button>
 
-                <Button x:Name="pr_line" Click="line_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Grid.Column="3" >
+                <Button x:Name="pr_line" Click="line_Click" BorderThickness="0" ToolTip="Линия" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Grid.Column="3" >
                     <Image Source="/Resources/pryamaya.png"></Image>
                 </Button>
-
-            </Grid>
-            <Grid Grid.Column="0" Margin="0,40,165,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="30*"/>
-                    <ColumnDefinition Width="30*"/>
-                    <ColumnDefinition Width="30*"/>
-                    <ColumnDefinition Width="30*"/>
-                    <ColumnDefinition Width="30*"/>
-                    <ColumnDefinition Width="30*"/>
-
-                </Grid.ColumnDefinitions>
+                <Button Content="Button" HorizontalAlignment="Center" VerticalAlignment="Center" Height="38" Width="56" Grid.Column="4" Grid.RowSpan="2" Click="Button_Click_1"/>
+                <Label x:Name="label_state" Content="" HorizontalAlignment="Center" VerticalAlignment="Top" Height="25" Width="312" Grid.Column="4" Grid.ColumnSpan="3" />
+                <CheckBox x:Name="check" Content="Пунктир" Checked="checkBox_Checked" Unchecked="checkBox_Unchecked" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,7,7,0" Grid.Column="6" Height="15" Width="66"/>
 
 
-                <Button x:Name="lastic" MouseDown="imgTL_MouseDown" Background="{x:Null}" Click="Button_Click" Height="37" Width="37" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible"  Grid.Column="0">
+
+            <Button x:Name="lastic" ToolTip="Ластик" MouseDown="imgTL_MouseDown" Grid.Row="1" BorderThickness="0" Background="{x:Null}" Click="Button_Click" Height="37" Width="37" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible"  Grid.Column="0">
                     <Image Source="/Resources/lastik.png" Visibility="Visible" Width="auto" Height="auto" HorizontalAlignment="Left" VerticalAlignment="Center"></Image>
                 </Button>
 
-                <Button x:Name="circle" Click="circle_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="1" >
+                <Button x:Name="circle" Click="circle_Click" ToolTip="Круг" BorderThickness="0" Grid.Row="1" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="1" >
                     <Image Source="/Resources/circle.png"></Image>
                 </Button>
 
-                <Button x:Name="dec_graph" Click="dec_graph_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="2" >
+                <Button x:Name="dec_graph" Click="dec_graph_Click" BorderThickness="0" ToolTip="График" Grid.Row="1" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="2" >
                     <Image Source="/Resources/graph.png"></Image>
                 </Button>
 
-                <Button x:Name="image" Click="image_Click" Height="37" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="3" >
+                <Button x:Name="image" Click="image_Click" Height="37" BorderThickness="0" ToolTip="Вставить изображение" Grid.Row="1" Width="37" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="3" >
                     <Image Source="/Resources/image.png"></Image>
                 </Button>
-
-            </Grid>
-            <Button x:Name="del" Click="del_Click" Height="30" Width="90" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Grid.Column="1" Margin="0,45,0,0" >
+        </Grid>
+        <Button x:Name="del" Click="del_Click" BorderThickness="0" Grid.Row="1" Height="30" Width="90" Background="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="1" Margin="0,0,0,0" >
                 Очистить лист
             </Button>
-            <Button x:Name="color" Click="Color_Click" Height="90" Width="90" Background="{x:Null}" BorderBrush="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="2" >
+            <Button x:Name="color" Click="Color_Click" Grid.RowSpan="2" ToolTip="Выбор цвета" Height="90" Width="90" Background="{x:Null}" BorderBrush="{x:Null}"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Grid.Column="2" >
                 <Image Source="/Resources/gradient.png" Height="62" Width="70"></Image>
             </Button>
-            <Border Background="{x:Null}" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" Margin="631,0,0,41">
-                <StackPanel Margin="-1,0,0,-1">
-                    <Slider Name="sizeSlider" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="125" ValueChanged="Slider_ValueChanged" Maximum="100" Grid.Column="1"/>
-                    <TextBox HorizontalAlignment="Center" FontSize="10" Text="Толщина линии" VerticalAlignment="Top" Background="LightYellow" Width="94" BorderBrush="LightYellow" Grid.Column="1"/>
+            <Border Background="{x:Null}" BorderBrush="Black"  BorderThickness="1" Grid.Row="0" Margin="0,0,0,0" Grid.Column="1">
+                <StackPanel Margin="0,0,0,0">
+                    <Slider x:Name="sizeSlider" VerticalAlignment="Center" ToolTip="Толщина линий" Width="125" Margin="0,13,0,0" ValueChanged="Slider_ValueChanged" Maximum="100"/>
                 </StackPanel>
             </Border>
-            <Label x:Name="label_state" Content="" HorizontalAlignment="Left" Margin="321,60,0,0" VerticalAlignment="Top" Height="25" Width="312"/>
-
-            <CheckBox x:Name="check" Content="Пунктир" Checked="checkBox_Checked" Unchecked="checkBox_Unchecked" HorizontalAlignment="Left" Margin="540,10,0,0" VerticalAlignment="Top"/>
-            <Button Content="Button" HorizontalAlignment="Left" Margin="335,22,0,0" VerticalAlignment="Top" Height="38" Width="56" Click="Button_Click_1"/>
 
         </Grid>
         <Grid>
