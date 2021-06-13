@@ -2,6 +2,9 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="EnteringText.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="FormulaParserWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -15,6 +18,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="EnteringText.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="FormulaParserWindow.xaml">
       <SubType>Designer</SubType>
     </Page>

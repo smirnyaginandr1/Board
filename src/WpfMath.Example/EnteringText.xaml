@@ -1,0 +1,15 @@
+﻿<Window x:Class="MathBoard.EnteringText"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MathBoard"
+        mc:Ignorable="d"
+        Title="Введите текст" Height="212" Width="427">
+    <Grid>
+        <Button x:Name="ok" Content="Ок" HorizontalAlignment="Left" Margin="294,136,0,0" VerticalAlignment="Top" Height="20" Width="83" Click="ok_Click"/>
+        <Button x:Name="cancel" Content="Отмена" HorizontalAlignment="Left" Margin="206,136,0,0" VerticalAlignment="Top" Height="20" Width="83" Click="cancel_Click"/>
+        <TextBox x:Name="text" AcceptsReturn="True" HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="121" TextChanged="TextBox_TextChanged"/>
+
+    </Grid>
+</Window>

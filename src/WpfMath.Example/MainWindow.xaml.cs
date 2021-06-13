@@ -489,9 +489,20 @@ namespace WpfMath.Example
                     break;
 
                 case State.Text:
-                    TextBlock TB = new TextBlock();
-                    TB.Text = "Successfull";
-                    ic.Children.Add(TB);
+                    EnteringText x = new EnteringText();
+                    x.ShowDialog();
+                    if (x.DialogResult == true)
+                    {
+                        string s = x.text.Text;
+
+                        TextBlock TB = new TextBlock()
+                        {
+                            Margin = new Thickness(mousePoint.X, mousePoint.Y - 80, 0, 0),
+                            FontSize = getStroke()
+                        };
+                        TB.Text = s;
+                        ic.Children.Add(TB);
+                    }
                     break;
 
                 case State.Image:
@@ -757,7 +768,7 @@ namespace WpfMath.Example
             fs.Close();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void text_Click(object sender, RoutedEventArgs e)
         {
             setStateCursor(State.Text);
         }
